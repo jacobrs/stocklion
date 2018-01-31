@@ -4,62 +4,56 @@ King::King(const Position &initialPosition, const Color &initialPlayer) : Piece(
 
 std::vector<Position> King::possibleMoves() {
     std::vector<Position> moves;
-    Position possiblePositions;
+    Position possiblePosition;
 
+    possiblePosition = currentPosition;
+    possiblePosition.column--;
     // Handles left side moves
-    if (currentPosition.column - 1 >= 'A') {
-        possiblePositions = {
-                static_cast<char>(currentPosition.column - 1),
-                currentPosition.row
-        };
-        moves.push_back(possiblePositions);
+    if (possiblePosition.column >= 'A') {
+        moves.push_back(possiblePosition);
 
-        if (currentPosition.row - 1 >= 1) {
-            possiblePositions.row = currentPosition.row - 1;
-            moves.push_back(possiblePositions);
+        if (possiblePosition.row - 1 >= 1) {
+            possiblePosition.row--;
+            moves.push_back(possiblePosition);
+            possiblePosition.row++;
         }
 
-        if (currentPosition.row + 1 <= 8) {
-            possiblePositions.row = currentPosition.row + 1;
-            moves.push_back(possiblePositions);
+        if (possiblePosition.row + 1 <= 8) {
+            possiblePosition.row++;
+            moves.push_back(possiblePosition);
         }
     }
 
+    possiblePosition = currentPosition;
+    possiblePosition.column++;
     // Handles right side moves
-    if (currentPosition.column + 1 <= 'H') {
-        possiblePositions = {
-                static_cast<char>(currentPosition.column + 1),
-                currentPosition.row
-        };
-        moves.push_back(possiblePositions);
+    if (possiblePosition.column <= 'H') {
+        moves.push_back(possiblePosition);
 
-        if (currentPosition.row - 1 >= 1) {
-            possiblePositions.row = currentPosition.row - 1;
-            moves.push_back(possiblePositions);
+        if (possiblePosition.row - 1 >= 1) {
+            possiblePosition.row--;
+            moves.push_back(possiblePosition);
+            possiblePosition.row++;
         }
 
-        if (currentPosition.row + 1 <= 8) {
-            possiblePositions.row = currentPosition.row + 1;
-            moves.push_back(possiblePositions);
+        if (possiblePosition.row + 1 <= 8) {
+            possiblePosition.row++;
+            moves.push_back(possiblePosition);
         }
     }
 
+    possiblePosition = currentPosition;
+    possiblePosition.row++;
     // Handles top middle
-    if (currentPosition.row + 1 <= 8) {
-        possiblePositions = {
-                currentPosition.column,
-                currentPosition.row + 1
-        };
-        moves.push_back(possiblePositions);
+    if (possiblePosition.row <= 8) {
+        moves.push_back(possiblePosition);
     }
 
+    possiblePosition = currentPosition;
+    possiblePosition.row--;
     // Handle bottom middle
-    if (currentPosition.row - 1 >= 1) {
-        possiblePositions = {
-                currentPosition.column,
-                currentPosition.row - 1
-        };
-        moves.push_back(possiblePositions);
+    if (possiblePosition.row >= 1) {
+        moves.push_back(possiblePosition);
     }
 
     return moves;
