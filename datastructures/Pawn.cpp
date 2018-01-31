@@ -1,11 +1,6 @@
-#include "Pieces.h"
+#include "Pawn.h"
 
 Pawn::Pawn(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
-Rook::Rook(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
-Knight::Knight(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
-King::King(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
-Queen::Queen(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
-Bishop::Bishop(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
 bool canJumpTwoSpaces(const Pawn &p){
     return (p.currentPosition.row == 6 && p.player == BLACK) || (p.player == WHITE && p.currentPosition.row == 2);
@@ -54,20 +49,4 @@ std::vector<Position> Pawn::possibleMoves() {
     }
 
     return positions;
-}
-
-std::vector<Position> Knight::possibleMoves() {
-    return std::vector<Position>();
-}
-std::vector<Position> Queen::possibleMoves() {
-    return std::vector<Position>();
-}
-std::vector<Position> King::possibleMoves() {
-    return std::vector<Position>();
-}
-std::vector<Position> Rook::possibleMoves() {
-    return std::vector<Position>();
-}
-std::vector<Position> Bishop::possibleMoves() {
-    return std::vector<Position>();
 }

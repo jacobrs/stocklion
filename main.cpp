@@ -1,5 +1,5 @@
 #include <iostream>
-#include "datastructures/Pieces.h"
+#include "datastructures/Pawn.h"
 
 
 int main() {
