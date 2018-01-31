@@ -15,11 +15,10 @@ struct Position {
 
 
 class Piece {
-private:
+public:
     Position currentPosition;
     Color player;
 
-public:
     explicit Piece(Position initialPosition, Color player);
     virtual std::vector<Position> possibleMoves() = 0;
     void move(Position position);
