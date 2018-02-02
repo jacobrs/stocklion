@@ -1,10 +1,10 @@
 #include <iostream>
-#include "datastructures/Pawn.h"
-#include "datastructures/Bishop.h"
-#include "datastructures/Rook.h"
-#include "datastructures/Queen.h"
-#include "datastructures/King.h"
-#include "datastructures/Knight.h"
+#include "datastructures/pieces/Pawn.h"
+#include "datastructures/pieces/Bishop.h"
+#include "datastructures/pieces/Rook.h"
+#include "datastructures/pieces/Queen.h"
+#include "datastructures/pieces/King.h"
+#include "datastructures/pieces/Knight.h"
 
 int main() {
 
