@@ -11,6 +11,8 @@ enum Color {
 struct Position {
     char column;
     int row;
+
+    bool operator==(const Position &other);
 };
 
 
