@@ -1,7 +1,3 @@
-//
-// Created by Yashar Dabiran on 2018-02-03.
-//
-
 #include "Board.h"
 #include "pieces/Bishop.h"
 #include "pieces/King.h"
@@ -36,7 +32,7 @@ bool Board::isMoveValid(Position &initPos, Position &destPos, Color player) {
     std::vector<Position> possibleMoves = piece->possibleMoves();
     bool canBeDone = false;
     for (auto &&position : possibleMoves) {
-        if (position.row == initPos.row && position.column == initPos.column)
+        if (position == initPos)
             canBeDone = true;
     }
     if (!canBeDone)
@@ -59,102 +55,35 @@ Color *Board::whoWon() {
 void Board::initState() {
     //Black and white Pawn initialization
     for (int i = 1; i <= 8; ++i) {
-        auto *pos = new Position;
-        pos->column = (char)('A' + i - 1);
-        pos->row = 2;
-        board[2][i] = new Pawn(*pos, WHITE);
-
-        pos = new Position;
-        pos->column = (char)('A' + i - 1);
-        pos->row = 7;
-        board[7][i] = new Pawn(*pos, BLACK);
+        board[2][i] = new Pawn(*(new Position({(char)('A' + i - 1), 2})), WHITE);
+        board[7][i] = new Pawn(*(new Position({(char)('A' + i - 1), 7})), BLACK);
     }
 
     //Rook initialization
-    auto *pos = new Position;
-    pos->row = 1;
-    pos->column = 'A';
-    board[1][1] = new Rook(*pos, WHITE);
-
-    pos = new Position;
-    pos->row = 1;
-    pos->column = 'H';
-    board[1][8] = new Rook(*pos, WHITE);
-
-    pos = new Position;
-    pos->row = 8;
-    pos->column = 'A';
-    board[8][1] = new Rook(*pos, BLACK);
-
-    pos = new Position;
-    pos->row = 8;
-    pos->column = 'H';
-    board[8][8] = new Rook(*pos, BLACK);
-
+    board[1][1] = new Rook(*(new Position({'A', 1})), WHITE);
+    board[1][8] = new Rook(*(new Position({'H', 1})), WHITE);
+    board[8][1] = new Rook(*(new Position({'A', 8})), BLACK);
+    board[8][8] = new Rook(*(new Position({'H', 8})), BLACK);
 
     //Knight initialization
-    pos = new Position;
-    pos->row = 1;
-    pos->column = 'B';
-    board[1][2] = new Knight(*pos, WHITE);
-
-    pos = new Position;
-    pos->row = 1;
-    pos->column = 'G';
-    board[1][7] = new Knight(*pos, WHITE);
-
-    pos = new Position;
-    pos->row = 8;
-    pos->column = 'B';
-    board[8][2] = new Knight(*pos, BLACK);
-
-    pos = new Position;
-    pos->row = 8;
-    pos->column = 'G';
-    board[8][7] = new Knight(*pos, BLACK);
+    board[1][2] = new Knight(*(new Position({'B', 1})), WHITE);
+    board[1][7] = new Knight(*(new Position({'G', 1})), WHITE);
+    board[8][2] = new Knight(*(new Position({'B', 8})), BLACK);
+    board[8][7] = new Knight(*(new Position({'G', 8})), BLACK);
 
     //Bishop initialization
-    pos = new Position;
-    pos->row = 1;
-    pos->column = 'C';
-    board[1][3] = new Bishop(*pos, WHITE);
-
-    pos = new Position;
-    pos->row = 1;
-    pos->column = 'F';
-    board[1][6] = new Bishop(*pos, WHITE);
-
-    pos = new Position;
-    pos->row = 8;
-    pos->column = 'C';
-    board[8][3] = new Bishop(*pos, BLACK);
-
-    pos = new Position;
-    pos->row = 8;
-    pos->column = 'F';
-    board[8][6] = new Bishop(*pos, BLACK);
+    board[1][3] = new Bishop(*(new Position({'C', 1})), WHITE);
+    board[1][6] = new Bishop(*(new Position({'F', 1})), WHITE);
+    board[8][3] = new Bishop(*(new Position({'C', 8})), BLACK);
+    board[8][6] = new Bishop(*(new Position({'F', 8})), BLACK);
 
     //Queen initialization
-    pos = new Position;
-    pos->row = 1;
-    pos->column = 'D';
-    board[1][4] = new Queen(*pos, WHITE);
-
-    pos = new Position;
-    pos->row = 8;
-    pos->column = 'D';
-    board[8][4] = new Queen(*pos, BLACK);
+    board[1][4] = new Queen(*(new Position({'D', 1})), WHITE);
+    board[8][4] = new Queen(*(new Position({'D', 8})), BLACK);
 
     //King initialization
-    pos = new Position;
-    pos->row = 1;
-    pos->column = 'E';
-    board[1][5] = new King(*pos, WHITE);
-
-    pos = new Position;
-    pos->row = 8;
-    pos->column = 'E';
-    board[8][5] = new King(*pos, BLACK);
+    board[1][5] = new King(*(new Position({'E', 1})), WHITE);
+    board[8][5] = new King(*(new Position({'E', 8})), BLACK);
 }
 
 

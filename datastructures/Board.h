@@ -1,7 +1,3 @@
-//
-// Created by Yashar Dabiran on 2018-02-03.
-//
-
 #ifndef STOCKLION_BOARD_H
 #define STOCKLION_BOARD_H
 
