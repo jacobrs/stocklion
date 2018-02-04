@@ -12,10 +12,6 @@ struct Position {
     char column;
     int row;
 
-    bool operator==(const Position &a, const Position &b)
-    {
-        return a.column == b.column && a.row == b.row;
-    }
 };
 
 
