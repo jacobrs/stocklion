@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Board.h"
 #include "pieces/Bishop.h"
 #include "pieces/King.h"
@@ -25,6 +26,11 @@ bool Board::movePiece(Position &initPos, Position &destPos, Color player) {
 bool Board::isMoveValid(Position &initPos, Position &destPos, Color player) {
     auto piece = board[initPos.row][initPos.column - 'A' + 1];
 
+    if (piece == nullptr) {
+        std::cout << "POSITION ERROR attempted to get a position that has no piece" << std::endl;
+        return false;
+    }
+
     if (piece->player != player)
         return false;
 
@@ -35,11 +41,10 @@ bool Board::isMoveValid(Position &initPos, Position &destPos, Color player) {
         if (position == initPos)
             canBeDone = true;
     }
-    if (!canBeDone)
-        return false;
+
+    return canBeDone;
 
     //TODO Check to see if there's a check!
-    return true;
 }
 
 std::vector<Position> Board::validMovesOfPiece(Position &piecePos) {
