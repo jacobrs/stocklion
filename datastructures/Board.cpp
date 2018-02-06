@@ -42,7 +42,11 @@ bool Board::isMoveValid(Position &initPos, Position &destPos, Color player) {
             canBeDone = true;
     }
 
-    return canBeDone;
+    if(!canBeDone){
+        return false;
+    }
+
+    return true;
 
     //TODO Check to see if there's a check!
 }
