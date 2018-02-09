@@ -72,3 +72,7 @@ std::vector<Position> Knight::possibleMoves() {
 
     return positions;
 }
+
+char Knight::getCLIToken() {
+    return 'N';
+}

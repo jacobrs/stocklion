@@ -58,3 +58,7 @@ std::vector<Position> King::possibleMoves() {
 
     return moves;
 }
+
+char King::getCLIToken() {
+    return 'K';
+}
