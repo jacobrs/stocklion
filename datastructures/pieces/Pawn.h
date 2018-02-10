@@ -8,6 +8,7 @@ class Pawn : public Piece {
 public:
     explicit Pawn(const Position &initialPosition, const Color &initialPlayer);
     std::vector<Position> possibleMoves() override;
+    char getCLIToken() override;
 };
 
 #endif

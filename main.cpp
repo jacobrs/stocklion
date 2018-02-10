@@ -5,6 +5,7 @@
 #include "datastructures/pieces/Queen.h"
 #include "datastructures/pieces/King.h"
 #include "datastructures/pieces/Knight.h"
+#include "converters/FENConverter.h"
 
 int main() {
 
@@ -49,6 +50,12 @@ int main() {
     for(auto position: knight->possibleMoves()){
         std::cout << position.column << position.row << " ";
     }
+
+    Board *board = new Board(WHITE);
+    FENConverter::convert("rnbqk2r/pppp1ppp/4pn2/1B1P4/1b6/4P3/PPP2PPP/RNBQK1NR w KQkq -", board);
+
+    std::cout << std::endl << "loaded from fen successfully" << std::endl;
+    board->printBoard();
 
     return 0;
 }

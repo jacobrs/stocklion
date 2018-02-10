@@ -49,3 +49,7 @@ std::vector<Position> Queen::possibleMoves() {
 
     return positions;
 }
+
+char Queen::getCLIToken() {
+    return 'Q';
+}
