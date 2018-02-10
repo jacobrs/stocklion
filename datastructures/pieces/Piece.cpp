@@ -12,3 +12,5 @@ Piece::Piece(Position initialPosition, Color initialPlayer) {
     currentPosition = initialPosition;
     player = initialPlayer;
 }
+
+Piece::~Piece() {}

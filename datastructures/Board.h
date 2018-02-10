@@ -2,6 +2,7 @@
 #define STOCKLION_BOARD_H
 
 #include "pieces/Piece.h"
+#include <iostream>
 
 class Board {
 private:

@@ -22,6 +22,7 @@ public:
     Color player;
 
     explicit Piece(Position initialPosition, Color player);
+    virtual ~Piece();
     virtual std::vector<Position> possibleMoves() = 0;
     virtual char getCLIToken() = 0;
     void move(Position position);
