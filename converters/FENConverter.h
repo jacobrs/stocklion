@@ -7,7 +7,7 @@
 class FENConverter {
 
 public:
-    void convert(std::string fen, Board *board);
+    static void convert(std::string fen, Board *board);
 };
 
 

@@ -51,9 +51,8 @@ int main() {
         std::cout << position.column << position.row << " ";
     }
 
-    FENConverter converter = FENConverter();
     Board *board = new Board(WHITE);
-    converter.convert("rnbqk2r/pppp1ppp/4pn2/1B1P4/1b6/4P3/PPP2PPP/RNBQK1NR w KQkq -", board);
+    FENConverter::convert("rnbqk2r/pppp1ppp/4pn2/1B1P4/1b6/4P3/PPP2PPP/RNBQK1NR w KQkq -", board);
 
     std::cout << std::endl << "loaded from fen successfully" << std::endl;
     board->printBoard();
