@@ -2,6 +2,7 @@
 #define STOCKLION_BOARD_H
 
 #include "pieces/Piece.h"
+#include <iostream>
 
 class Board {
 private:
@@ -14,7 +15,7 @@ private:
 
 public:
     //Takes color of our player
-    explicit Board(Color &playerColor);
+    explicit Board(Color playerColor);
 
     //Returns false if the move is not valid, otherwise returns true
     bool movePiece(Position &initPos, Position &destPos, Color player);
@@ -23,6 +24,15 @@ public:
     bool isMoveValid(Position &initPos, Position &destPos, Color player);
 
     std::vector<Position> validMovesOfPiece(Position &piecePos);
+
+    // Place a piece on the board (should be used by converters only)
+    void placePiece(Position pos, Piece *p);
+    void setPlayerColor(Color c);
+    void wipeBoard();
+
+
+    // Print the board in an easy to read way
+    void printBoard();
 
     //Checks for the winner in the current state.
     //Returns null if none of the players won, otherwise returns the color of the winner.

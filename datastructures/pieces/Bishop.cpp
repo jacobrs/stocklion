@@ -38,3 +38,7 @@ std::vector<Position> Bishop::possibleMoves() {
 
     return positions;
 }
+
+char Bishop::getCLIToken() {
+    return 'B';
+}

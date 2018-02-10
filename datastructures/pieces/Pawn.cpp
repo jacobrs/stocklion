@@ -50,3 +50,7 @@ std::vector<Position> Pawn::possibleMoves() {
 
     return positions;
 }
+
+char Pawn::getCLIToken() {
+    return 'P';
+}

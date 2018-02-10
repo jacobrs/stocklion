@@ -19,3 +19,7 @@ std::vector<Position> Rook::possibleMoves() {
 
     return positions;
 }
+
+char Rook::getCLIToken() {
+    return 'R';
+}

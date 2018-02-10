@@ -7,6 +7,7 @@ class Knight : public Piece {
 public:
     explicit Knight(const Position &initialPosition, const Color &initialPlayer);
     std::vector<Position> possibleMoves() override;
+    char getCLIToken() override;
 };
 
 
