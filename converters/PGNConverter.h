@@ -18,8 +18,8 @@ private:
     static void getPieceOrPawnPosition(Color, std::string, Board*, Position&, Position&);
 public:
     static void convert(std::string, Board*);
-    static void playAlgerbraicMove(Color, std::string, Board*);
-    static int getAlgerbraicMoveType(std::string);
+    static void playAlgebraicMove(Color, std::string, Board *);
+    static int getAlgebraicMoveType(std::string);
 };
 
 #endif //STOCKLION_PGNCONVERTER_H

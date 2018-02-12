@@ -25,15 +25,15 @@ void PGNConverter::convert(std::string pgnString, Board *board) {
         std::string whiteMove = bothMoves.substr(0, bothMoves.find(' '));
         std::string blackMove = bothMoves.substr(bothMoves.find(' ') + 1, bothMoves.length());
 
-        playAlgerbraicMove(WHITE, whiteMove, board);
-        playAlgerbraicMove(BLACK, blackMove, board);
+        playAlgebraicMove(WHITE, whiteMove, board);
+        playAlgebraicMove(BLACK, blackMove, board);
 
         regIterator++;
     }
 }
 
-void PGNConverter::playAlgerbraicMove(Color currPlayer, std::string algerbraicString, Board *board) {
-    int moveType = PGNConverter::getAlgerbraicMoveType(algerbraicString);
+void PGNConverter::playAlgebraicMove(Color currPlayer, std::string algebraicString, Board *board) {
+    int moveType = PGNConverter::getAlgebraicMoveType(algebraicString);
     Position startingPosition;
     Position endingPosition;
 
@@ -54,10 +54,10 @@ void PGNConverter::playAlgerbraicMove(Color currPlayer, std::string algerbraicSt
             // The game has been decided either by forfeit or by the game state
             return;
         case PIECE_MOVE:
-            getPieceOrPawnPosition(currPlayer, algerbraicString, board, startingPosition, endingPosition);
+            getPieceOrPawnPosition(currPlayer, algebraicString, board, startingPosition, endingPosition);
             break;
         case PAWN_MOVE:
-            getPieceOrPawnPosition(currPlayer, algerbraicString, board, startingPosition, endingPosition);
+            getPieceOrPawnPosition(currPlayer, algebraicString, board, startingPosition, endingPosition);
             break;
         default:
             // Throw an exception since the pgn format is invalid
@@ -69,32 +69,32 @@ void PGNConverter::playAlgerbraicMove(Color currPlayer, std::string algerbraicSt
     }
 }
 
-int PGNConverter::getAlgerbraicMoveType(std::string algerbraicString) {
+int PGNConverter::getAlgebraicMoveType(std::string algebraicString) {
     std::regex whiteSpace("\\s+");
-    algerbraicString = std::regex_replace(algerbraicString, whiteSpace, "");
+    algebraicString = std::regex_replace(algebraicString, whiteSpace, "");
 
-    if (algerbraicString == "O-O") {
+    if (algebraicString == "O-O") {
         return CASTLE_MOVE_KING;
     }
 
-    if (algerbraicString == "O-O-O") {
+    if (algebraicString == "O-O-O") {
         return CASTLE_MOVE_QUEEN;
     }
 
-    if (algerbraicString == "1-0" || algerbraicString == "0-1" || algerbraicString == "1/2-1/2") {
+    if (algebraicString == "1-0" || algebraicString == "0-1" || algebraicString == "1/2-1/2") {
         return RESULT_MOVE;
     }
 
     std::regex pieceRegEx("^[NKRQB]([1-8]|[a-h])?x?[a-h][1-8][+#]?$");
     std::smatch sm;
-    std::regex_match(algerbraicString, sm, pieceRegEx);
+    std::regex_match(algebraicString, sm, pieceRegEx);
 
     if (sm.length()) {
         return PIECE_MOVE;
     }
 
     std::regex pawnRegEx("^[a-h]?x?[a-h][1-8](=[NBQR])?[+#]?$");
-    std::regex_match(algerbraicString, sm, pawnRegEx);
+    std::regex_match(algebraicString, sm, pawnRegEx);
 
     if (sm.length()) {
         return PAWN_MOVE;
