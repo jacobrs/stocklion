@@ -6,6 +6,8 @@
 #include "datastructures/pieces/King.h"
 #include "datastructures/pieces/Knight.h"
 #include "converters/FENConverter.h"
+#include "datastructures/Board.h"
+#include "converters/PGNConverter.h"
 
 int main() {
 
@@ -51,11 +53,18 @@ int main() {
         std::cout << position.column << position.row << " ";
     }
 
-    Board *board = new Board(WHITE);
-    FENConverter::convert("rnbqk2r/pppp1ppp/4pn2/1B1P4/1b6/4P3/PPP2PPP/RNBQK1NR w KQkq -", board);
+    Board *fenBoard = new Board(WHITE);
+    FENConverter::convert("rnbqk2r/pppp1ppp/4pn2/1B1P4/1b6/4P3/PPP2PPP/RNBQK1NR w KQkq -", fenBoard);
 
     std::cout << std::endl << "loaded from fen successfully" << std::endl;
-    board->printBoard();
+    fenBoard->printBoard();
+
+    Board *pgnBoard = new Board(WHITE);
+    PGNConverter::convert("1. d4 e5 2. dxe5 Qf6 3. Kd2 Qxe5 4. Nf3 Qe3+\n"
+                          "5. Ke1 Qxc1 6. Nc3 Qf4 7. Nd4 f5 8. Nxf5 Qxf5", pgnBoard);
+
+    std::cout << std::endl << "loaded from PGN successfully" << std::endl;
+    pgnBoard->printBoard();
 
     return 0;
 }

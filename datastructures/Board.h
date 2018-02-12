@@ -30,6 +30,9 @@ public:
     void setPlayerColor(Color c);
     void wipeBoard();
 
+    // Gets a specific piece from the board
+    Piece* getPiece(int, int);
+    Piece* getPiece(Position);
 
     // Print the board in an easy to read way
     void printBoard();
