@@ -6,7 +6,6 @@
 #include "datastructures/pieces/King.h"
 #include "datastructures/pieces/Knight.h"
 #include "converters/FENConverter.h"
-#include "datastructures/Board.h"
 #include "converters/PGNConverter.h"
 
 int main() {
