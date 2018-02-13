@@ -17,6 +17,7 @@ bool Board::movePiece(Position &initPos, Position &destPos, Color player) {
     if (!isMoveValid(initPos, destPos, player))
         return false;
     else {
+        getPiece(initPos)->move(destPos);
         board[destPos.row][destPos.column - 'A' + 1] = board[initPos.row][initPos.column - 'A' + 1];
         board[initPos.row][initPos.column - 'A' + 1] = nullptr;
         return true;
@@ -38,7 +39,7 @@ bool Board::isMoveValid(Position &initPos, Position &destPos, Color player) {
     std::vector<Position> possibleMoves = piece->possibleMoves();
     bool canBeDone = false;
     for (auto &&position : possibleMoves) {
-        if (position == initPos)
+        if (position == destPos)
             canBeDone = true;
     }
 
@@ -142,4 +143,6 @@ void Board::printBoard() {
     }
 }
 
-
+Piece* Board::getPiece(Position position) {
+    return board[position.row][(int)(position.column - 'A') + 1];
+}

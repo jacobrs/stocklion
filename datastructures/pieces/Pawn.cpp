@@ -3,7 +3,7 @@
 Pawn::Pawn(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
 bool canJumpTwoSpaces(const Pawn &p){
-    return (p.currentPosition.row == 6 && p.player == BLACK) || (p.player == WHITE && p.currentPosition.row == 2);
+    return (p.currentPosition.row == 7 && p.player == BLACK) || (p.player == WHITE && p.currentPosition.row == 2);
 }
 
 std::vector<Position> Pawn::possibleMoves() {
