@@ -143,10 +143,6 @@ void Board::printBoard() {
     }
 }
 
-Piece* Board::getPiece(int row, int col) {
-    return board[row][col];
-}
-
 Piece* Board::getPiece(Position position) {
     return board[position.row][(int)(position.column - 'A') + 1];
 }

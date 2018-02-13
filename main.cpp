@@ -59,12 +59,19 @@ int main() {
     std::cout << std::endl << "loaded from fen successfully" << std::endl;
     fenBoard->printBoard();
 
-    Board *pgnBoard = new Board(WHITE);
+    Board *pgnBoardFirst = new Board(WHITE);
     PGNConverter::convert("1. d4 e5 2. dxe5 Qf6 3. Kd2 Qxe5 4. Nf3 Qe3+\n"
-                          "5. Ke1 Qxc1 6. Nc3 Qf4 7. Nd4 f5 8. Nxf5 Qxf5", pgnBoard);
+                          "5. Ke1 Qxc1 6. Nc3 Qf4 7. Nd4 f5 8. Nxf5\n", pgnBoardFirst);
 
     std::cout << std::endl << "loaded from PGN successfully" << std::endl;
-    pgnBoard->printBoard();
+    pgnBoardFirst->printBoard();
+
+    Board *pgnBoardSecond = new Board(WHITE);
+    PGNConverter::convert("1. d4 e5 2. dxe5 Qf6 3. Kd2 Qxe5 4. Nf3 Qe3+\n"
+                                  "5. Ke1 Qxc1 6. Nc3 Qf4 7. Nd4 f5 8. Nxf5 Qxf5\n", pgnBoardSecond);
+
+    std::cout << std::endl << "loaded from PGN successfully" << std::endl;
+    pgnBoardSecond->printBoard();
 
     return 0;
 }

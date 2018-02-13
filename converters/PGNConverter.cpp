@@ -8,12 +8,12 @@
 
 void PGNConverter::convert(std::string pgnString, Board *board) {
     // Parses the pgn string move by move ungreedily
-    std::regex regEx("([0-9]+\\.\\s.*?\\s.*?\\s|[0-9]+\\.\\s.*?\\s.*)");
+    std::regex regEx("([0-9]+\\.\\s.*?\\s.*?\\s|[0-9]+\\.\\s.*?\\s.*|[0-9]+\\.\\s.*\\s|[0-9]+\\.\\s.*)");
     auto regIterator = std::sregex_iterator(pgnString.cbegin(), pgnString.cend(), regEx);
     auto regEnd = std::sregex_iterator();
 
     while (regIterator != regEnd) {
-        std::regex fullMoveRegEx("[0-9]+\\.\\s(.*)\\s?");
+        std::regex fullMoveRegEx("^[0-9]+\\.\\s(.*?)\\s?$");
         std::regex newLine("(\n)");
         // Remove newlines in the middle of moves
         std::string regString = std::regex_replace(regIterator->str(), newLine, " ");
@@ -23,10 +23,12 @@ void PGNConverter::convert(std::string pgnString, Board *board) {
         std::string bothMoves = sm[1];
 
         std::string whiteMove = bothMoves.substr(0, bothMoves.find(' '));
-        std::string blackMove = bothMoves.substr(bothMoves.find(' ') + 1, bothMoves.length());
-
         playAlgebraicMove(WHITE, whiteMove, board);
-        playAlgebraicMove(BLACK, blackMove, board);
+
+        if (bothMoves.find(' ') != std::string::npos) {
+            std::string blackMove = bothMoves.substr(bothMoves.find(' ') + 1, bothMoves.length());
+            playAlgebraicMove(BLACK, blackMove, board);
+        }
 
         regIterator++;
     }
