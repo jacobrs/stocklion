@@ -56,13 +56,6 @@ std::vector<Position> Board::validMovesOfPiece(Position &piecePos) {
     return board[piecePos.row][piecePos.column - 'A' + 1]->possibleMoves();
 }
 
-Color *Board::whoWon() {
-    //TODO
-    return nullptr;
-}
-
-
-
 void Board::initState() {
     for(int i = 0; i < 9; i++)
         for(int j = 0; j < 9; j++)
@@ -145,4 +138,8 @@ void Board::printBoard() {
 
 Piece* Board::getPiece(Position position) {
     return board[position.row][(int)(position.column - 'A') + 1];
+}
+
+bool Board::isInCheck(Color player) {
+    return false;
 }
