@@ -3,6 +3,8 @@
 
 #include <vector>
 
+class Board;
+
 enum Color {
     BLACK,
     WHITE
@@ -23,7 +25,8 @@ public:
 
     explicit Piece(Position initialPosition, Color player);
     virtual ~Piece();
-    virtual std::vector<Position> possibleMoves() = 0;
+    virtual std::vector<Position> possibleDirectMoves(Board& board) = 0;
+    std::vector<Position> possibleMoves(Board& board);
     virtual char getCLIToken() = 0;
     void move(Position position);
 };

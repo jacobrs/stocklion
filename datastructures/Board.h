@@ -33,9 +33,6 @@ public:
     // Gets a specific piece from the board
     Piece* getPiece(Position);
 
-    // Is player in check?
-    bool isInCheck(Color player);
-
     // Print the board in an easy to read way
     void printBoard();
 };

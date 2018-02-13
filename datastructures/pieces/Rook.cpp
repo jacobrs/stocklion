@@ -2,7 +2,7 @@
 
 Rook::Rook(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
-std::vector<Position> Rook::possibleMoves() {
+std::vector<Position> Rook::possibleDirectMoves(Board &board) {
     std::vector<Position> positions;
 
     for(char i = 'A'; i <= 'H'; i++){

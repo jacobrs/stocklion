@@ -9,6 +9,7 @@ class CheckDetector {
 
 public:
     static bool playerInCheck(Color player, Board& board);
+    static bool moveMakesPlayerChecked(Position initial, Position target, Board& board, Piece& p);
 
 };
 

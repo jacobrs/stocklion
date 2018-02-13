@@ -1,8 +1,9 @@
 #include "Bishop.h"
+#include "../../detectors/CheckDetector.h"
 
 Bishop::Bishop(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
-std::vector<Position> Bishop::possibleMoves() {
+std::vector<Position> Bishop::possibleDirectMoves(Board& board) {
 
     std::vector<Position> positions;
 

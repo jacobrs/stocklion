@@ -216,7 +216,7 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
             }
 
             // TODO: Place the piece on an empty board and get all the places it can go to
-            std::vector<Position> potentialStartingPositions = potentialPiece->possibleMoves();
+            std::vector<Position> potentialStartingPositions = potentialPiece->possibleMoves(*board);
 
             for (unsigned i = 0; i < potentialStartingPositions.size(); i++) {
                 Position positionCandidate = potentialStartingPositions[i];

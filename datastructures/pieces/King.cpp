@@ -1,8 +1,9 @@
 #include "King.h"
+#include "../../detectors/CheckDetector.h"
 
 King::King(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
-std::vector<Position> King::possibleMoves() {
+std::vector<Position> King::possibleDirectMoves(Board &board) {
     std::vector<Position> moves;
     Position possiblePosition;
 

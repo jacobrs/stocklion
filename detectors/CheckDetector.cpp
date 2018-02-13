@@ -21,7 +21,7 @@ bool CheckDetector::playerInCheck(Color player, Board& board) {
 
     if(attackedKind != nullptr) {
         for (auto p : enemyPieces) {
-            for (auto attack : p->possibleMoves()) {
+            for (auto attack : p->possibleDirectMoves(board)) {
                 if (attack == attackedKind->currentPosition) {
                     res = true;
                     break;
@@ -39,4 +39,8 @@ bool CheckDetector::playerInCheck(Color player, Board& board) {
     delete attackedKind;
 
     return res;
+}
+
+bool CheckDetector::moveMakesPlayerChecked(Position initial, Position target, Board &board, Piece &p) {
+    return false;
 }

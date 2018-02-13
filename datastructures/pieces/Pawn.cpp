@@ -6,7 +6,7 @@ bool canJumpTwoSpaces(const Pawn &p){
     return (p.currentPosition.row == 7 && p.player == BLACK) || (p.player == WHITE && p.currentPosition.row == 2);
 }
 
-std::vector<Position> Pawn::possibleMoves() {
+std::vector<Position> Pawn::possibleDirectMoves(Board &board) {
     int max_jump = canJumpTwoSpaces(*this) ? 2 : 1;
     std::vector<Position> positions;
 

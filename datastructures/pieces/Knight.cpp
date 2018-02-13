@@ -2,7 +2,7 @@
 
 Knight::Knight(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
-std::vector<Position> Knight::possibleMoves() {
+std::vector<Position> Knight::possibleDirectMoves(Board &board) {
     std::vector<Position> positions;
     Position possiblePosition;
 

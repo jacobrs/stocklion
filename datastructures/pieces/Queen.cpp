@@ -2,7 +2,7 @@
 
 Queen::Queen(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
-std::vector<Position> Queen::possibleMoves() {
+std::vector<Position> Queen::possibleDirectMoves(Board &board) {
     std::vector<Position> positions;
 
     // top left to bottom right
