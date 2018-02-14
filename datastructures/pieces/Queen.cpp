@@ -20,7 +20,7 @@ std::vector<Position> Queen::possibleDirectMoves(Board &board) {
 
     while(comparison.row >= 1 && comparison.column <= 'H'){
         potentialPiece = board.getPiece(comparison);
-        if(potentialPiece != nullptr && potentialPiece->player == player){
+        if(potentialPiece != nullptr && potentialPiece->player == player && potentialPiece != this){
             comparison.row--;
             comparison.column++;
             continue;
@@ -52,7 +52,7 @@ std::vector<Position> Queen::possibleDirectMoves(Board &board) {
 
     while(comparison.row <= 8 && comparison.column <= 'H'){
         potentialPiece = board.getPiece(comparison);
-        if(potentialPiece != nullptr && potentialPiece->player == player){
+        if(potentialPiece != nullptr && potentialPiece->player == player && potentialPiece != this){
             comparison.row ++;
             comparison.column ++;
             continue;

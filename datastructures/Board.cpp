@@ -43,8 +43,10 @@ bool Board::isMoveValid(Position &initPos, Position &destinationPosition, Color 
     std::vector<Position> possibleMoves = piece->possibleMoves(*this);
     bool canBeDone = false;
     for (auto &&position : possibleMoves) {
-        if (position == destinationPosition)
+        if (position == destinationPosition) {
             canBeDone = true;
+            break;
+        }
     }
 
     if(!canBeDone){
