@@ -34,3 +34,6 @@
 # IDEA files
 .idea/
 cmake-build-debug
+
+# Mac Files
+.DS_STORE
