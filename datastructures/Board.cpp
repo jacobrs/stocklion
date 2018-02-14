@@ -6,6 +6,7 @@
 #include "pieces/Pawn.h"
 #include "pieces/Queen.h"
 #include "pieces/Rook.h"
+#include "../util/UnicodeTable.h"
 
 
 Board::Board(Color playerColor) {
@@ -138,6 +139,44 @@ void Board::printBoard() {
 
                 std::cout << token << " ";
             }
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Board::printUnicodeBoard() {
+    std::cout << " ";
+    UnicodeTable::printLine(TOP, 9);
+    std::cout << std::endl;
+    for (int i = 8; i >= 0; i--) {
+        std::cout << i;
+        if (i != 0) {
+            UnicodeTable::printChar("VERTICAL_LINE");
+        } else {
+            std::cout << "  ";
+        }
+
+        for (int j = 1; j < 9; j++) {
+            if(i == 0)
+                std::cout << (char)('A' + j - 1) << "   ";
+            else {
+                char32_t token = ' ';
+                if(board[i][j] != nullptr){
+                    token = board[i][j]->getUnicodeToken();
+                }
+                std::cout << " ";
+                UnicodeTable::printChar32(token);
+                std::cout << " ";
+                UnicodeTable::printChar("VERTICAL_LINE");
+            }
+        }
+
+        if (i == 1) {
+            std::cout << std::endl << " ";
+            UnicodeTable::printLine(BOTTOM, 9);
+        } else if (i != 0) {
+            std::cout << std::endl << " ";
+            UnicodeTable::printLine(MIDDLE, 9);
         }
         std::cout << std::endl;
     }

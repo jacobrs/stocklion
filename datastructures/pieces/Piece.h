@@ -25,6 +25,7 @@ public:
     virtual ~Piece();
     virtual std::vector<Position> possibleMoves() = 0;
     virtual char getCLIToken() = 0;
+    virtual char32_t getUnicodeToken() = 0;
     void move(Position position);
 };
 

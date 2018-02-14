@@ -36,6 +36,7 @@ public:
 
     // Print the board in an easy to read way
     void printBoard();
+    void printUnicodeBoard();
 
     //Checks for the winner in the current state.
     //Returns null if none of the players won, otherwise returns the color of the winner.
