@@ -25,7 +25,7 @@ char Rook::getCLIToken() {
 }
 
 char32_t Rook::getUnicodeToken() {
-    if (player == WHITE) {
+    if (player != WHITE) {
         return U'\u2656';
     } else {
         return U'\u265C';

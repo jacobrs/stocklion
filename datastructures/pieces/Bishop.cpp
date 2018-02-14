@@ -44,7 +44,7 @@ char Bishop::getCLIToken() {
 }
 
 char32_t Bishop::getUnicodeToken() {
-    if (player == WHITE) {
+    if (player != WHITE) {
         return U'\u2657';
     } else {
         return U'\u265D';

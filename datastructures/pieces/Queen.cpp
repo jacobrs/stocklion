@@ -55,7 +55,7 @@ char Queen::getCLIToken() {
 }
 
 char32_t Queen::getUnicodeToken() {
-    if (player == WHITE) {
+    if (player != WHITE) {
         return U'\u2655';
     } else {
         return U'\u265B';

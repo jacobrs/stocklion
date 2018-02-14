@@ -56,7 +56,7 @@ char Pawn::getCLIToken() {
 }
 
 char32_t Pawn::getUnicodeToken() {
-    if (player == WHITE) {
+    if (player != WHITE) {
         return U'\u2659';
     } else {
         return U'\u265F';
