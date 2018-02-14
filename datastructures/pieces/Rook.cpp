@@ -23,3 +23,11 @@ std::vector<Position> Rook::possibleDirectMoves(Board &board) {
 char Rook::getCLIToken() {
     return 'R';
 }
+
+char32_t Rook::getUnicodeToken() {
+    if (player != WHITE) {
+        return U'\u2656';
+    } else {
+        return U'\u265C';
+    }
+}

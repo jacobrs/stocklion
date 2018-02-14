@@ -54,3 +54,11 @@ std::vector<Position> Pawn::possibleDirectMoves(Board &board) {
 char Pawn::getCLIToken() {
     return 'P';
 }
+
+char32_t Pawn::getUnicodeToken() {
+    if (player != WHITE) {
+        return U'\u2659';
+    } else {
+        return U'\u265F';
+    }
+}

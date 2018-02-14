@@ -53,3 +53,11 @@ std::vector<Position> Queen::possibleDirectMoves(Board &board) {
 char Queen::getCLIToken() {
     return 'Q';
 }
+
+char32_t Queen::getUnicodeToken() {
+    if (player != WHITE) {
+        return U'\u2655';
+    } else {
+        return U'\u265B';
+    }
+}

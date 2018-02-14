@@ -43,3 +43,11 @@ std::vector<Position> Bishop::possibleDirectMoves(Board& board) {
 char Bishop::getCLIToken() {
     return 'B';
 }
+
+char32_t Bishop::getUnicodeToken() {
+    if (player != WHITE) {
+        return U'\u2657';
+    } else {
+        return U'\u265D';
+    }
+}

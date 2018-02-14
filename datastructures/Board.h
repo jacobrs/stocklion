@@ -35,6 +35,7 @@ public:
 
     // Print the board in an easy to read way
     void printBoard();
+    void printUnicodeBoard();
 };
 
 

@@ -63,3 +63,11 @@ std::vector<Position> King::possibleDirectMoves(Board &board) {
 char King::getCLIToken() {
     return 'K';
 }
+
+char32_t King::getUnicodeToken() {
+    if (player != WHITE) {
+        return U'\u2654';
+    } else {
+        return U'\u265A';
+    }
+}
