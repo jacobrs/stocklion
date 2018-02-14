@@ -6,7 +6,7 @@ bool CheckDetector::playerInCheck(Color player, Board& board) {
     Piece *attackedKind = nullptr;
 
     for(int i = 1; i < 9; i ++){
-        for(char j = 'A'; j < 'G'; j++){
+        for(char j = 'A'; j < 'I'; j++){
             Piece *p = board.getPiece({ j, i });
             if(p != nullptr && p->player != player) {
                 enemyPieces.push_back(p);
@@ -32,11 +32,6 @@ bool CheckDetector::playerInCheck(Color player, Board& board) {
             }
         }
     }
-
-    for(auto p : enemyPieces){
-        delete p;
-    }
-    delete attackedKind;
 
     return res;
 }

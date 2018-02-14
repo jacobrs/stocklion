@@ -7,9 +7,53 @@
 #include "datastructures/pieces/Knight.h"
 #include "converters/FENConverter.h"
 #include "converters/PGNConverter.h"
+#include "detectors/CheckDetector.h"
+
+void run(){
+    auto board = new Board();
+
+    Position from = { 'E', 2 };
+    Position to = {'E', 4};
+    board->movePiece(from, to, WHITE);
+
+    from = { 'A', 7 };
+    to = {'A', 6};
+    board->movePiece(from, to, BLACK);
+
+    from = { 'F', 1 };
+    to = {'C', 4};
+    board->movePiece(from, to, WHITE);
+
+    from = { 'A', 6 };
+    to = {'A', 5};
+    board->movePiece(from, to, BLACK);
+
+    from = { 'D', 1 };
+    to = {'H', 5};
+    board->movePiece(from, to, WHITE);
+
+    for(auto position: board->getPiece({'A', 8})->possibleMoves(*board)){
+        std::cout << position.column << position.row << " ";
+        board->placePiece(position, new Rook(position, WHITE));
+    }
+    std::cout << "\n";
+    board->printUnicodeBoard();
+
+    std::cout << CheckDetector::playerInCheck(BLACK, *board) << std::endl;
+
+    from = { 'A', 5 };
+    to = {'A', 4};
+    board->movePiece(from, to, BLACK);
+
+    from = { 'H', 5 };
+    to = {'F', 7};
+    board->movePiece(from, to, WHITE);
+}
 
 int main() {
 
+    run();
+    return 0;
     Board *board = new Board(WHITE);
     Position initialPosition = { 'E', 2 };
     Pawn *p = new Pawn(initialPosition, WHITE);

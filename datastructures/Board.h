@@ -15,13 +15,14 @@ private:
 
 public:
     // Takes color of our player
+    explicit Board();
     explicit Board(Color playerColor);
 
     // Returns false if the move is not valid, otherwise returns true
-    bool movePiece(Position &initPos, Position &destPos, Color player);
+    bool movePiece(Position &initPos, Position &destinationPosition, Color player);
 
     // Checks to see if the move is valid for the given player
-    bool isMoveValid(Position &initPos, Position &destPos, Color player);
+    bool isMoveValid(Position &initPos, Position &destinationPosition, Color player);
 
     std::vector<Position> validMovesOfPiece(Position &piecePos);
 

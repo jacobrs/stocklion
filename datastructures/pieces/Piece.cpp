@@ -5,6 +5,10 @@ bool Position::operator==(const Position &a) {
     return column == a.column && row == a.row;
 }
 
+bool Position::operator!=(const Position &other) {
+    return !(*this == other);
+}
+
 void Piece::move(Position p) {
     currentPosition = p;
 }
@@ -25,4 +29,8 @@ std::vector<Position> Piece::possibleMoves(Board &board) {
                                    }), positions.end());
 
     return positions;
+}
+
+bool Piece::isEnemyOrEmpty(Piece *p) {
+    return p == nullptr || p->player != player;
 }

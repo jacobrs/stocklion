@@ -15,6 +15,7 @@ struct Position {
     int row;
 
     bool operator==(const Position &other);
+    bool operator!=(const Position &other);
 };
 
 
@@ -23,6 +24,7 @@ public:
     Position currentPosition;
     Color player;
 
+    bool isEnemyOrEmpty(Piece *p);
     explicit Piece(Position initialPosition, Color player);
     virtual ~Piece();
     virtual std::vector<Position> possibleDirectMoves(Board& board) = 0;
