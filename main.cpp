@@ -70,7 +70,7 @@ int main() {
                                   "5. Ke1 Qxc1 6. Nc3 Qf4 7. Nd4 f5 8. Nxf5 Qxf5\n", pgnBoardSecond);
 
     std::cout << std::endl << "loaded from PGN successfully" << std::endl;
-    pgnBoardSecond->printBoard();
+    pgnBoardSecond->printUnicodeBoard();
 
     return 0;
 }
