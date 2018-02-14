@@ -24,7 +24,6 @@ void PGNConverter::convert(std::string pgnString, Board *board) {
 
         std::string whiteMove = bothMoves.substr(0, bothMoves.find(' '));
         playAlgebraicMove(WHITE, whiteMove, board);
-        board->printUnicodeBoard();
 
         if (bothMoves.find(' ') != std::string::npos) {
             std::string blackMove = bothMoves.substr(bothMoves.find(' ') + 1, bothMoves.length());
