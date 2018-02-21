@@ -1,5 +1,6 @@
 #include "Piece.h"
 #include "../../detectors/CheckDetector.h"
+#include <algorithm>
 
 bool Position::operator==(const Position &a) {
     return column == a.column && row == a.row;
