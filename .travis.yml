@@ -13,11 +13,9 @@ addons:
       - gcc-6
 script:
   # Check versions of gcc, g++ and cmake
+  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6
   - gcc -v && g++ -v && cmake --version
   - mkdir build && cd build
   - cmake ../
   - make
   - ./stocklion_tests
-install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-6" CC="gcc-6"; fi
-  - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.7" CC="clang-3.7"; fi
