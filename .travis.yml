@@ -5,22 +5,19 @@ compiler: gcc
 addons:
   apt:
     sources:
+      - llvm-toolchain-precise
       - ubuntu-toolchain-r-test
     packages:
-      - gcc-6
-      - g++-6
-      - mingw-w64
-      - cmake
+      - clang-3.7
+      - g++-5
+      - gcc-5
 script:
-  # Linking the new compiler versions
-  - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
-  # Set cmake to use gcc-6 and g++-6
-  - export CC=/usr/bin/gcc-6
-  - export CXX=/usr/bin/g++-6
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
   - mkdir build && cd build
   - cmake ../
   - make -std=c++11
   - ./stocklion_tests
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
+  - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.7" CC="clang-3.7"; fi
