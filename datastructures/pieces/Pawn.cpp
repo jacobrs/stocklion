@@ -62,7 +62,7 @@ std::vector<Position> Pawn::possibleDirectMoves(Board &board) {
     return positions;
 }
 
-char Pawn::getCLIToken() {
+char Pawn::getCLIToken() const {
     return 'P';
 }
 
