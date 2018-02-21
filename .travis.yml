@@ -16,7 +16,7 @@ script:
   - gcc -v && g++ -v && cmake --version
   - mkdir build && cd build
   - cmake ../
-  - make -std=c++11
+  - make
   - ./stocklion_tests
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
