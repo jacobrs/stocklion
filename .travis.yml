@@ -9,13 +9,13 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - gcc-4.9
-      - g++-4.9
+      - gcc-6
+      - g++-6
       - cmake
 script:
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
-  # Run build commands
   - cmake ./
   - make
   - ./stocklion_tests
