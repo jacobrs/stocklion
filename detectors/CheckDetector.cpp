@@ -3,7 +3,7 @@
 bool CheckDetector::playerInCheck(Color player, Board& board) {
 
     std::vector<Piece*> enemyPieces;
-    Piece *attackedKind = nullptr;
+    Piece *attackedKing = nullptr;
 
     for(int i = 1; i < 9; i ++){
         for(char j = 'A'; j < 'I'; j++){
@@ -12,17 +12,17 @@ bool CheckDetector::playerInCheck(Color player, Board& board) {
                 enemyPieces.push_back(p);
             }
             if(p != nullptr && p->getCLIToken() == 'K' && p->player == player){
-                attackedKind = p;
+                attackedKing = p;
             }
         }
     }
 
     bool res = false;
 
-    if(attackedKind != nullptr) {
+    if(attackedKing != nullptr) {
         for (auto p : enemyPieces) {
             for (auto attack : p->possibleDirectMoves(board)) {
-                if (attack == attackedKind->currentPosition) {
+                if (attack == attackedKing->currentPosition) {
                     res = true;
                     break;
                 }

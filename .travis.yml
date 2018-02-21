@@ -17,3 +17,5 @@ script:
   - gcc -v && g++ -v && cmake --version
   # Run build commands
   - cmake ./
+  - make
+  - ./stocklion_tests
