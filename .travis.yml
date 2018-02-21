@@ -2,17 +2,17 @@ dist: trusty
 sudo: required
 language: cpp
 compiler: gcc
-before_install:
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update -qq
-install:
-  - sudo apt-get install -qq g++-6
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - gcc-6
 script:
   # Check versions of gcc, g++ and cmake
-  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6
   - gcc -v && g++ -v && cmake --version
   - mkdir build && cd build
-  - cmake ../
+  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake ../
   - make
   - ./stocklion_tests
