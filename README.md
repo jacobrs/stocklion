@@ -1,4 +1,4 @@
-# StockLion
+# StockLion [![Build Status](https://travis-ci.org/jacobrs/stocklion.svg?branch=master)](https://travis-ci.org/jacobrs/stocklion)
 A custom built chess bot in c++.
 This project is part of the coding night initiative to introduce algorithms and datastructures. Bots compete against one another at the end of the development period.
 
