@@ -10,6 +10,7 @@
 
 int main() {
 
+    Board *board = new Board(WHITE);
     Position initialPosition = { 'E', 2 };
     Pawn *p = new Pawn(initialPosition, WHITE);
     Bishop *bishop = new Bishop({ 'E', 4 }, WHITE);
@@ -18,37 +19,37 @@ int main() {
     King *king = new King({ 'E', 4}, WHITE);
     Knight *knight = new Knight({ 'E', 4}, WHITE);
 
-    for(auto position: p->possibleMoves()){
+    for(auto position: p->possibleMoves(*board)){
         std::cout << position.column << position.row << " ";
     }
 
     std::cout << std::endl;
 
-    for(auto position: bishop->possibleMoves()){
+    for(auto position: bishop->possibleMoves(*board)){
         std::cout << position.column << position.row << " ";
     }
 
     std::cout << std::endl;
 
-    for(auto position: rook->possibleMoves()){
+    for(auto position: rook->possibleMoves(*board)){
         std::cout << position.column << position.row << " ";
     }
 
     std::cout << std::endl;
 
-    for(auto position: queen->possibleMoves()){
+    for(auto position: queen->possibleMoves(*board)){
         std::cout << position.column << position.row << " ";
     }
 
     std::cout << std::endl;
 
-    for(auto position: king->possibleMoves()){
+    for(auto position: king->possibleMoves(*board)){
         std::cout << position.column << position.row << " ";
     }
 
     std::cout << std::endl;
 
-    for(auto position: knight->possibleMoves()){
+    for(auto position: knight->possibleMoves(*board)){
         std::cout << position.column << position.row << " ";
     }
 

@@ -1,4 +1,5 @@
 #include "Pawn.h"
+#include "../Board.h"
 
 Pawn::Pawn(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
@@ -6,9 +7,10 @@ bool canJumpTwoSpaces(const Pawn &p){
     return (p.currentPosition.row == 7 && p.player == BLACK) || (p.player == WHITE && p.currentPosition.row == 2);
 }
 
-std::vector<Position> Pawn::possibleMoves() {
+std::vector<Position> Pawn::possibleDirectMoves(Board &board) {
     int max_jump = canJumpTwoSpaces(*this) ? 2 : 1;
     std::vector<Position> positions;
+    Piece *possiblePiece;
 
     // compute available moves
     for(int i = 1; i <= max_jump; i++) {
@@ -20,7 +22,10 @@ std::vector<Position> Pawn::possibleMoves() {
             newPosition.row += i;
         }
         if(newPosition.row <= 8 && newPosition.row >= 1) {
-            positions.push_back(newPosition);
+            possiblePiece = board.getPiece(newPosition);
+            if(possiblePiece == nullptr) {
+                positions.push_back(newPosition);
+            }
         }
     }
 
@@ -41,10 +46,16 @@ std::vector<Position> Pawn::possibleMoves() {
 
     if(leftCapture.row >= 1 && leftCapture.row <= 8){
         if(leftCapture.column >= 'A') {
-            positions.push_back(leftCapture);
+            possiblePiece = board.getPiece(leftCapture);
+            if(possiblePiece != nullptr && possiblePiece->player != player) {
+                positions.push_back(leftCapture);
+            }
         }
         if(rightCapture.column <= 'H') {
-            positions.push_back(rightCapture);
+            possiblePiece = board.getPiece(rightCapture);
+            if(possiblePiece != nullptr && possiblePiece->player != player) {
+                positions.push_back(rightCapture);
+            }
         }
     }
 

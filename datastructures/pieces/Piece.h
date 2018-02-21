@@ -3,6 +3,8 @@
 
 #include <vector>
 
+class Board;
+
 enum Color {
     BLACK,
     WHITE
@@ -13,6 +15,7 @@ struct Position {
     int row;
 
     bool operator==(const Position &other);
+    bool operator!=(const Position &other);
 };
 
 
@@ -21,9 +24,11 @@ public:
     Position currentPosition;
     Color player;
 
+    bool isEnemyOrEmpty(Piece *p);
     explicit Piece(Position initialPosition, Color player);
     virtual ~Piece();
-    virtual std::vector<Position> possibleMoves() = 0;
+    virtual std::vector<Position> possibleDirectMoves(Board& board) = 0;
+    std::vector<Position> possibleMoves(Board& board);
     virtual char getCLIToken() = 0;
     virtual char32_t getUnicodeToken() = 0;
     void move(Position position);

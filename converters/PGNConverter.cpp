@@ -8,12 +8,12 @@
 
 void PGNConverter::convert(std::string pgnString, Board *board) {
     // Parses the pgn string move by move ungreedily
-    std::regex regEx("([0-9]+\\.\\s.*?\\s.*?\\s|[0-9]+\\.\\s.*?\\s.*|[0-9]+\\.\\s.*\\s|[0-9]+\\.\\s.*)");
+    std::regex regEx(R"(([0-9]+\.\s.*?\s.*?\s|[0-9]+\.\s.*?\s.*|[0-9]+\.\s.*\s|[0-9]+\.\s.*))");
     auto regIterator = std::sregex_iterator(pgnString.cbegin(), pgnString.cend(), regEx);
     auto regEnd = std::sregex_iterator();
 
     while (regIterator != regEnd) {
-        std::regex fullMoveRegEx("^[0-9]+\\.\\s(.*?)\\s?$");
+        std::regex fullMoveRegEx(R"(^[0-9]+\.\s(.*?)\s?$)");
         std::regex newLine("(\n)");
         // Remove newlines in the middle of moves
         std::string regString = std::regex_replace(regIterator->str(), newLine, " ");
@@ -36,8 +36,8 @@ void PGNConverter::convert(std::string pgnString, Board *board) {
 
 void PGNConverter::playAlgebraicMove(Color currPlayer, std::string algebraicString, Board *board) {
     int moveType = PGNConverter::getAlgebraicMoveType(algebraicString);
-    Position startingPosition;
-    Position endingPosition;
+    Position startingPosition{};
+    Position endingPosition{};
 
     switch (moveType) {
         case CASTLE_MOVE_KING:
@@ -115,7 +115,7 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
     // Get all the relevant tokens from the above regex
     char CLIToken = matches[1].str()[0];
     char multiMoveInfo = (char)(toupper(matches[2].str()[0]));
-    bool isExecution = matches[3].str()[0] == 'x' ? true : false;
+    bool isExecution = matches[3].str()[0] == 'x';
     end.column = (char)(toupper(matches[4].str()[0]));
     end.row = matches[5].str()[0] - '0';
 
@@ -216,7 +216,7 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
             }
 
             // TODO: Place the piece on an empty board and get all the places it can go to
-            std::vector<Position> potentialStartingPositions = potentialPiece->possibleMoves();
+            std::vector<Position> potentialStartingPositions = potentialPiece->possibleMoves(*board);
 
             for (unsigned i = 0; i < potentialStartingPositions.size(); i++) {
                 Position positionCandidate = potentialStartingPositions[i];

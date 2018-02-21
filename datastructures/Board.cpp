@@ -8,24 +8,28 @@
 #include "pieces/Rook.h"
 #include "../util/UnicodeTable.h"
 
+Board::Board() {
+    playerColor = WHITE;
+    initState();
+}
 
 Board::Board(Color playerColor) {
     this->playerColor = playerColor;
     initState();
 }
 
-bool Board::movePiece(Position &initPos, Position &destPos, Color player) {
-    if (!isMoveValid(initPos, destPos, player))
+bool Board::movePiece(Position &initPos, Position &destinationPosition, Color player) {
+    if (!isMoveValid(initPos, destinationPosition, player))
         return false;
     else {
-        getPiece(initPos)->move(destPos);
-        board[destPos.row][destPos.column - 'A' + 1] = board[initPos.row][initPos.column - 'A' + 1];
+        getPiece(initPos)->move(destinationPosition);
+        board[destinationPosition.row][destinationPosition.column - 'A' + 1] = board[initPos.row][initPos.column - 'A' + 1];
         board[initPos.row][initPos.column - 'A' + 1] = nullptr;
         return true;
     }
 }
 
-bool Board::isMoveValid(Position &initPos, Position &destPos, Color player) {
+bool Board::isMoveValid(Position &initPos, Position &destinationPosition, Color player) {
     auto piece = board[initPos.row][initPos.column - 'A' + 1];
 
     if (piece == nullptr) {
@@ -36,12 +40,13 @@ bool Board::isMoveValid(Position &initPos, Position &destPos, Color player) {
     if (piece->player != player)
         return false;
 
-    //TODO pass the board to the function
-    std::vector<Position> possibleMoves = piece->possibleMoves();
+    std::vector<Position> possibleMoves = piece->possibleMoves(*this);
     bool canBeDone = false;
     for (auto &&position : possibleMoves) {
-        if (position == destPos)
+        if (position == destinationPosition) {
             canBeDone = true;
+            break;
+        }
     }
 
     if(!canBeDone){
@@ -49,20 +54,11 @@ bool Board::isMoveValid(Position &initPos, Position &destPos, Color player) {
     }
 
     return true;
-
-    //TODO Check to see if there's a check!
 }
 
 std::vector<Position> Board::validMovesOfPiece(Position &piecePos) {
-    return board[piecePos.row][piecePos.column - 'A' + 1]->possibleMoves();
+    return board[piecePos.row][piecePos.column - 'A' + 1]->possibleMoves(*this);
 }
-
-Color *Board::whoWon() {
-    //TODO
-    return nullptr;
-}
-
-
 
 void Board::initState() {
     for(int i = 0; i < 9; i++)

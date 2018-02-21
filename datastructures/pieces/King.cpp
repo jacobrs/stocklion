@@ -1,12 +1,12 @@
 #include "King.h"
+#include "../../detectors/CheckDetector.h"
 
 King::King(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
-std::vector<Position> King::possibleMoves() {
+std::vector<Position> King::possibleDirectMoves(Board &board) {
     std::vector<Position> moves;
-    Position possiblePosition;
 
-    possiblePosition = currentPosition;
+    Position possiblePosition = currentPosition;
     possiblePosition.column--;
     // Handles left side moves
     if (possiblePosition.column >= 'A') {
@@ -14,13 +14,17 @@ std::vector<Position> King::possibleMoves() {
 
         if (possiblePosition.row - 1 >= 1) {
             possiblePosition.row--;
-            moves.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                moves.push_back(possiblePosition);
+            }
             possiblePosition.row++;
         }
 
         if (possiblePosition.row + 1 <= 8) {
             possiblePosition.row++;
-            moves.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                moves.push_back(possiblePosition);
+            }
         }
     }
 
@@ -32,13 +36,17 @@ std::vector<Position> King::possibleMoves() {
 
         if (possiblePosition.row - 1 >= 1) {
             possiblePosition.row--;
-            moves.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                moves.push_back(possiblePosition);
+            }
             possiblePosition.row++;
         }
 
         if (possiblePosition.row + 1 <= 8) {
             possiblePosition.row++;
-            moves.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                moves.push_back(possiblePosition);
+            }
         }
     }
 
@@ -46,14 +54,18 @@ std::vector<Position> King::possibleMoves() {
     possiblePosition.row++;
     // Handles top middle
     if (possiblePosition.row <= 8) {
-        moves.push_back(possiblePosition);
+        if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+            moves.push_back(possiblePosition);
+        }
     }
 
     possiblePosition = currentPosition;
     possiblePosition.row--;
     // Handle bottom middle
     if (possiblePosition.row >= 1) {
-        moves.push_back(possiblePosition);
+        if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+            moves.push_back(possiblePosition);
+        }
     }
 
     return moves;

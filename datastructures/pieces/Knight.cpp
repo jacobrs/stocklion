@@ -1,24 +1,28 @@
 #include "Knight.h"
+#include "../Board.h"
 
 Knight::Knight(const Position &initialPosition, const Color &initialPlayer) : Piece(initialPosition, initialPlayer) {}
 
-std::vector<Position> Knight::possibleMoves() {
+std::vector<Position> Knight::possibleDirectMoves(Board &board) {
     std::vector<Position> positions;
-    Position possiblePosition;
 
-    possiblePosition = currentPosition;
+    Position possiblePosition = currentPosition;
     possiblePosition.row += 2;
     // Handle top positions
     if (possiblePosition.row <= 8) {
         if (possiblePosition.column - 1 >= 'A') {
             possiblePosition.column--;
-            positions.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                positions.push_back(possiblePosition);
+            }
             possiblePosition.column++;
         }
 
         if (possiblePosition.column + 1 <= 'H') {
             possiblePosition.column++;
-            positions.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                positions.push_back(possiblePosition);
+            }
         }
     }
 
@@ -28,13 +32,17 @@ std::vector<Position> Knight::possibleMoves() {
     if (possiblePosition.row >= 1) {
         if (possiblePosition.column - 1 >= 'A') {
             possiblePosition.column--;
-            positions.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                positions.push_back(possiblePosition);
+            }
             possiblePosition.column++;
         }
 
         if (possiblePosition.column + 1 <= 'H') {
             possiblePosition.column++;
-            positions.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                positions.push_back(possiblePosition);
+            }
         }
     }
 
@@ -44,13 +52,17 @@ std::vector<Position> Knight::possibleMoves() {
     if (possiblePosition.column >= 'A') {
         if (possiblePosition.row - 1 >= 1) {
             possiblePosition.row--;
-            positions.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                positions.push_back(possiblePosition);
+            }
             possiblePosition.row++;
         }
 
         if (possiblePosition.row + 1 <= 8) {
             possiblePosition.row++;
-            positions.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                positions.push_back(possiblePosition);
+            }
         }
     }
 
@@ -60,13 +72,17 @@ std::vector<Position> Knight::possibleMoves() {
     if (possiblePosition.column <= 'H') {
         if (possiblePosition.row - 1 >= 1) {
             possiblePosition.row--;
-            positions.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                positions.push_back(possiblePosition);
+            }
             possiblePosition.row++;
         }
 
         if (possiblePosition.row + 1 <= 8) {
             possiblePosition.row++;
-            positions.push_back(possiblePosition);
+            if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+                positions.push_back(possiblePosition);
+            }
         }
     }
 
