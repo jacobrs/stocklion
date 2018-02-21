@@ -12,7 +12,5 @@ addons:
 script:
   - CXX=/usr/bin/clang++-5.0 CC=/usr/bin/clang-5.0 cmake .
   - gcc -v && g++ -v && cmake --version
-  - mkdir build && cd build
-  - cmake ../
-  - make
+  - cmake --build .
   - ./stocklion_tests
