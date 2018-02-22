@@ -16,6 +16,7 @@ enum MoveType {
 class PGNConverter {
 private:
     static void getPieceOrPawnPosition(Color, std::string, Board*, Position&, Position&);
+    static Board *emptyBoard;
 public:
     static void convert(std::string, Board*);
     static void playAlgebraicMove(Color, std::string, Board *);

@@ -1,19 +1,19 @@
 #include <iostream>
-#include <codecvt>
+#include <clocale>
 #include "UnicodeTable.h"
 
-const std::map<std::string, char32_t> UnicodeTable::UNICODE_CHARS = {
-        { "VERTICAL_LINE", U'\u2502' },
-        { "HORIZONTAL_LINE", U'\u2500' },
-        { "LEFT_JOINT", U'\u251C' },
-        { "RIGHT_JOINT", U'\u2524' },
-        { "BOTTOM_JOINT", U'\u2534' },
-        { "TOP_JOINT", U'\u252C' },
-        { "MIDDLE_JOINT", U'\u253C' },
-        { "TOP_RIGHT_JOINT", U'\u2510' },
-        { "TOP_LEFT_JOINT", U'\u250C' },
-        { "BOTTOM_LEFT_JOINT", U'\u2514' },
-        { "BOTTOM_RIGHT_JOINT", U'\u2518' }
+const std::map<std::string, std::string> UnicodeTable::UNICODE_CHARS = {
+        { "VERTICAL_LINE", "\u2502" },
+        { "HORIZONTAL_LINE", "\u2500" },
+        { "LEFT_JOINT", "\u251C" },
+        { "RIGHT_JOINT", "\u2524" },
+        { "BOTTOM_JOINT", "\u2534" },
+        { "TOP_JOINT", "\u252C" },
+        { "MIDDLE_JOINT", "\u253C" },
+        { "TOP_RIGHT_JOINT", "\u2510" },
+        { "TOP_LEFT_JOINT", "\u250C" },
+        { "BOTTOM_LEFT_JOINT", "\u2514" },
+        { "BOTTOM_RIGHT_JOINT", "\u2518" }
 };
 
 void UnicodeTable::printLine(rowSection rowName, int length) {
@@ -57,11 +57,9 @@ void UnicodeTable::printLine(rowSection rowName, int length) {
 }
 
 void UnicodeTable::printChar(std::string charName) {
-    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> convert;
-    std::cout << convert.to_bytes(UNICODE_CHARS.at(charName));
+    std::cout << UNICODE_CHARS.at(charName);
 }
 
-void UnicodeTable::printChar32(char32_t charUnicode) {
-    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> convert;
-    std::cout << convert.to_bytes(charUnicode);
+void UnicodeTable::printChar32(std::string charUnicode) {
+    std::cout << charUnicode;
 }
