@@ -21,6 +21,7 @@ endif()
 # Prevent overriding the parent project's compiler/linker
 # settings on Windows
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 
 # Add googletest directly to our build. This defines
 # the gtest and gtest_main targets.
@@ -43,8 +44,4 @@ add_executable(stocklion_tests tests/converters/PGNConverterTests.cpp datastruct
 target_link_libraries(stocklion_tests gtest gmock_main)
 add_test(NAME test_stocklion COMMAND stocklion_tests)
 
-set_target_properties(
-        PROPERTIES
-        COMPILE_FLAGS "-ftest-coverage -fprofile-arcs"
-        LINK_FLAGS    "-lgcov --coverage"
-)
+SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
