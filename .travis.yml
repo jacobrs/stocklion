@@ -13,8 +13,8 @@ install:
   # CMake
   - sudo apt-get install -qq cmake
   # g++4.8
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-6; fi
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-6" CC="gcc-6"; fi
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-6.2; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-6.2" CC="gcc-6.2"; fi
 
 before_script: cmake CMakeLists.txt
 
