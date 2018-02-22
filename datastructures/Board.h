@@ -32,11 +32,15 @@ public:
     void wipeBoard();
 
     // Gets a specific piece from the board
-    Piece* getPiece(Position);
+    Piece* getPiece(Position) const;
 
     // Print the board in an easy to read way
     void printBoard();
     void printUnicodeBoard();
+
+    // Comparators
+    bool operator==(const Board &other) const;
+    bool operator!=(const Board &other) const;
 };
 
 

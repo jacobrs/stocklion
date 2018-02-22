@@ -89,7 +89,7 @@ std::vector<Position> Knight::possibleDirectMoves(Board &board) {
     return positions;
 }
 
-char Knight::getCLIToken() {
+char Knight::getCLIToken() const {
     return 'N';
 }
 
