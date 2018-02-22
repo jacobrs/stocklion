@@ -24,8 +24,6 @@ public:
     // Checks to see if the move is valid for the given player
     bool isMoveValid(Position &initPos, Position &destinationPosition, Color player);
 
-    std::vector<Position> validMovesOfPiece(Position &piecePos);
-
     // Place a piece on the board (should be used by converters only)
     void placePiece(Position pos, Piece *p);
     void setPlayerColor(Color c);

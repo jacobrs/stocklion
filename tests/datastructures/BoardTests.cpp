@@ -1,11 +1,16 @@
 #include <gtest/gtest.h>
 #include <datastructures/Board.h>
+#include <datastructures/pieces/Knight.h>
 
 TEST(BoardTests, BoardComparatorSameBoards) {
 
     auto board1 = new Board();
     auto board2 = new Board();
+    ASSERT_TRUE(*board1 == *board2);
+    ASSERT_FALSE(*board1 != *board2);
 
+    board1->placePiece({'E', 4}, new Knight({'E', 4}, WHITE));
+    board2->placePiece({'E', 4}, new Knight({'E', 4}, WHITE));
     ASSERT_TRUE(*board1 == *board2);
     ASSERT_FALSE(*board1 != *board2);
 
@@ -22,6 +27,14 @@ TEST(BoardTests, BoardComparatorDifferentBoards) {
     ASSERT_FALSE(*board1 == *board2);
     ASSERT_TRUE(*board1 != *board2);
 
+    board1->wipeBoard();
+    board2->wipeBoard();
+
+    board1->placePiece({'E', 4}, new Knight({'E', 4}, WHITE));
+    board2->placePiece({'E', 4}, new Knight({'E', 4}, BLACK));
+    ASSERT_FALSE(*board1 == *board2);
+    ASSERT_TRUE(*board1 != *board2);
+
 }
 
 TEST(BoardTests, OutputNoCrash) {
@@ -34,5 +47,20 @@ TEST(BoardTests, OutputNoCrash) {
     delete board;
 
     SUCCEED();
+
+}
+
+TEST(BoardTests, InvalidMove) {
+
+    auto board = new Board();
+
+    Position from = {'E', 4}; Position to = {'E', 3};
+    ASSERT_FALSE(board->movePiece(from, to, WHITE));
+    from = {'E', 2}; to = {'E', 5};
+    ASSERT_FALSE(board->movePiece(from, to, WHITE));
+    from = {'E', 7}; to = {'E', 6};
+    ASSERT_FALSE(board->movePiece(from, to, WHITE));
+
+    delete board;
 
 }
