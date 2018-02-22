@@ -23,7 +23,7 @@ script:
   - export CXX=/usr/bin/g++-6
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
-  - cmake .
+  - cmake . -DCMAKE_BUILD_TYPE=Debug
   - make
   - ./stocklion_tests
 
