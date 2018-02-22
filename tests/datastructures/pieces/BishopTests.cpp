@@ -4,7 +4,6 @@
 #include "datastructures/Board.h"
 #include "datastructures/pieces/Bishop.h"
 
-
 TEST(BishopTests, MiddleOpenBoardPossibleMoves) {
     auto board = new Board;
 

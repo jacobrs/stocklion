@@ -63,7 +63,7 @@ TEST(KnightTests, BlockedByEnemies) {
 
 }
 
-TEST(KnightTests, BlockedByFriendlies) {
+TEST(KnightTests, BlockedByFriendly) {
 
     auto *board = new Board();
     board->wipeBoard();
