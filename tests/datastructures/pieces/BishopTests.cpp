@@ -58,7 +58,6 @@ TEST(BishopTests, BlockedByEnemy) {
     positions.push_back({'C', 2});
     positions.push_back({'F', 5});
 
-    ASSERT_TRUE(board->getPiece({'E', 4}) == bishop);
     ASSERT_TRUE(VectorComparator::comparePositions(board->getPiece({'E', 4})->possibleMoves(*board), positions));
 
     delete board;
@@ -86,7 +85,6 @@ TEST(BishopTests, BlockedByFriendly) {
     positions.push_back({'C', 2});
     positions.push_back({'B', 1});
 
-    ASSERT_TRUE(board->getPiece({'E', 4}) == bishop);
     ASSERT_TRUE(VectorComparator::comparePositions(board->getPiece({'E', 4})->possibleMoves(*board), positions));
 
     delete board;

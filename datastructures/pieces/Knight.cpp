@@ -96,7 +96,6 @@ char Knight::getCLIToken() const {
 std::string Knight::getUnicodeToken() {
     if (player != WHITE) {
         return "\u2658";
-    } else {
-        return "\u265E";
     }
+    return "\u265E";
 }

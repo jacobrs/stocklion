@@ -70,18 +70,14 @@ TEST(RookTests, BlockedByFriendly) {
     board->wipeBoard();
 
     Rook *rook = new Rook({'E', 4}, WHITE);
-    board->placePiece({'E', 5}, new Pawn({'E', 5}, BLACK));
-    board->placePiece({'E', 3}, new Pawn({'E', 3}, BLACK));
-    board->placePiece({'G', 4}, new Pawn({'G', 4}, BLACK));
-    board->placePiece({'C', 4}, new Pawn({'C', 4}, BLACK));
+    board->placePiece({'E', 5}, new Pawn({'E', 5}, WHITE));
+    board->placePiece({'E', 3}, new Pawn({'E', 3}, WHITE));
+    board->placePiece({'G', 4}, new Pawn({'G', 4}, WHITE));
+    board->placePiece({'C', 4}, new Pawn({'C', 4}, WHITE));
 
     std::vector<Position> positions;
     positions.push_back({'F', 4});
-    positions.push_back({'G', 4});
     positions.push_back({'D', 4});
-    positions.push_back({'C', 4});
-    positions.push_back({'E', 5});
-    positions.push_back({'E', 3});
 
     board->placePiece(rook->currentPosition, rook);
 

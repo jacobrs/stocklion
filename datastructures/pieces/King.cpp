@@ -82,7 +82,6 @@ char King::getCLIToken() const {
 std::string King::getUnicodeToken() {
     if (player != WHITE) {
         return "\u2654";
-    } else {
-        return "\u265A";
     }
+    return "\u265A";
 }

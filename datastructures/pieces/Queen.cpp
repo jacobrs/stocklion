@@ -149,7 +149,6 @@ char Queen::getCLIToken() const {
 std::string Queen::getUnicodeToken() {
     if (player != WHITE) {
         return "\u2655";
-    } else {
-        return "\u265B";
     }
+    return "\u265B";
 }

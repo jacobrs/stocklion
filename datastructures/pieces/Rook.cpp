@@ -77,7 +77,6 @@ char Rook::getCLIToken() const {
 std::string Rook::getUnicodeToken() {
     if (player != WHITE) {
         return "\u2656";
-    } else {
-        return "\u265C";
     }
+    return "\u265C";
 }
