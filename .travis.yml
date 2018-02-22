@@ -15,7 +15,6 @@ before_script: cmake CMakeLists.txt
 
 script:
   - $CXX --version
-  - mkdir build && cd build
-  - cmake ../
+  - cmake
   - make
   - ./stocklion_tests
