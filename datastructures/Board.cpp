@@ -178,6 +178,26 @@ void Board::printUnicodeBoard() {
     }
 }
 
-Piece* Board::getPiece(Position position) {
+Piece* Board::getPiece(Position position) const {
     return board[position.row][(int)(position.column - 'A') + 1];
+}
+
+bool Board::operator==(const Board &other) const {
+    for(char col = 'A'; col <= 'H'; col++){
+        for(int row = 1; row <= 8; row++){
+            Piece *p1 = other.getPiece({col, row});
+            Piece *p2 = getPiece({col, row});
+            if(p1 != nullptr && p2 != nullptr && *p1 != *p2){
+                return false;
+            }else if((p1 == nullptr && p2 != nullptr) || (p1 != nullptr && p2 == nullptr)){
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool Board::operator!=(const Board &other) const {
+    return !(*this == other);
 }

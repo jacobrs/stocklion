@@ -70,7 +70,7 @@ std::vector<Position> Rook::possibleDirectMoves(Board &board) {
     return positions;
 }
 
-char Rook::getCLIToken() {
+char Rook::getCLIToken() const {
     return 'R';
 }
 

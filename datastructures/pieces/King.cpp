@@ -71,7 +71,7 @@ std::vector<Position> King::possibleDirectMoves(Board &board) {
     return moves;
 }
 
-char King::getCLIToken() {
+char King::getCLIToken() const {
     return 'K';
 }
 

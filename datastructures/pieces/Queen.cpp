@@ -142,7 +142,7 @@ std::vector<Position> Queen::possibleDirectMoves(Board &board) {
     return positions;
 }
 
-char Queen::getCLIToken() {
+char Queen::getCLIToken() const {
     return 'Q';
 }
 

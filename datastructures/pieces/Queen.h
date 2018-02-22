@@ -7,7 +7,7 @@ class Queen : public Piece {
 public:
     explicit Queen(const Position &initialPosition, const Color &initialPlayer);
     std::vector<Position> possibleDirectMoves(Board &board) override;
-    char getCLIToken() override;
+    char getCLIToken() const override;
     std::string getUnicodeToken() override;
 };
 

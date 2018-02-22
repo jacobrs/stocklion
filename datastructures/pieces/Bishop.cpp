@@ -83,7 +83,7 @@ std::vector<Position> Bishop::possibleDirectMoves(Board& board) {
     return positions;
 }
 
-char Bishop::getCLIToken() {
+char Bishop::getCLIToken() const {
     return 'B';
 }
 
