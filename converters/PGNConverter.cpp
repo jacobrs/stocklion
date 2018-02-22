@@ -6,7 +6,10 @@
 #include "../datastructures/pieces/Rook.h"
 #include "../datastructures/pieces/Knight.h"
 
+Board *PGNConverter::emptyBoard = new Board();
+
 void PGNConverter::convert(std::string pgnString, Board *board) {
+    emptyBoard->wipeBoard();
     // Parses the pgn string move by move ungreedily
     std::regex regEx(R"(([0-9]+\.\s.*?\s.*?\s|[0-9]+\.\s.*?\s.*|[0-9]+\.\s.*\s|[0-9]+\.\s.*))");
     auto regIterator = std::sregex_iterator(pgnString.cbegin(), pgnString.cend(), regEx);
@@ -30,6 +33,7 @@ void PGNConverter::convert(std::string pgnString, Board *board) {
             playAlgebraicMove(BLACK, blackMove, board);
         }
 
+        board->printUnicodeBoard();
         regIterator++;
     }
 }
@@ -215,8 +219,7 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
                     break;
             }
 
-            // TODO: Place the piece on an empty board and get all the places it can go to
-            std::vector<Position> potentialStartingPositions = potentialPiece->possibleMoves(*board);
+            std::vector<Position> potentialStartingPositions = potentialPiece->possibleMoves(*emptyBoard);
 
             for (unsigned i = 0; i < potentialStartingPositions.size(); i++) {
                 Position positionCandidate = potentialStartingPositions[i];

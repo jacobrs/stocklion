@@ -93,10 +93,10 @@ char Knight::getCLIToken() {
     return 'N';
 }
 
-char32_t Knight::getUnicodeToken() {
+std::string Knight::getUnicodeToken() {
     if (player != WHITE) {
-        return U'\u2658';
+        return "\u2658";
     } else {
-        return U'\u265E';
+        return "\u265E";
     }
 }

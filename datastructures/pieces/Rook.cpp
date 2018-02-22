@@ -74,10 +74,10 @@ char Rook::getCLIToken() {
     return 'R';
 }
 
-char32_t Rook::getUnicodeToken() {
+std::string Rook::getUnicodeToken() {
     if (player != WHITE) {
-        return U'\u2656';
+        return "\u2656";
     } else {
-        return U'\u265C';
+        return "\u265C";
     }
 }

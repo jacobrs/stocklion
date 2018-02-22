@@ -30,7 +30,7 @@ public:
     virtual std::vector<Position> possibleDirectMoves(Board& board) = 0;
     std::vector<Position> possibleMoves(Board& board);
     virtual char getCLIToken() = 0;
-    virtual char32_t getUnicodeToken() = 0;
+    virtual std::string getUnicodeToken() = 0;
     void move(Position position);
 };
 

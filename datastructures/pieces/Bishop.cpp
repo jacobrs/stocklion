@@ -87,10 +87,10 @@ char Bishop::getCLIToken() {
     return 'B';
 }
 
-char32_t Bishop::getUnicodeToken() {
+std::string Bishop::getUnicodeToken() {
     if (player != WHITE) {
-        return U'\u2657';
+        return "\u2657";
     } else {
-        return U'\u265D';
+        return "\u265D";
     }
 }

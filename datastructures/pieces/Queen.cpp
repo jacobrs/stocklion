@@ -146,10 +146,10 @@ char Queen::getCLIToken() {
     return 'Q';
 }
 
-char32_t Queen::getUnicodeToken() {
+std::string Queen::getUnicodeToken() {
     if (player != WHITE) {
-        return U'\u2655';
+        return "\u2655";
     } else {
-        return U'\u265B';
+        return "\u265B";
     }
 }

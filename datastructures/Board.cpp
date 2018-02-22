@@ -156,7 +156,7 @@ void Board::printUnicodeBoard() {
             if(i == 0)
                 std::cout << (char)('A' + j - 1) << "   ";
             else {
-                char32_t token = ' ';
+                std::string token = " ";
                 if(board[i][j] != nullptr){
                     token = board[i][j]->getUnicodeToken();
                 }
