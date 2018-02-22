@@ -63,7 +63,7 @@ void FENConverter::convert(std::string fen, Board *board) {
                     board->placePiece(p, new Pawn(p, (c == 'p') ? BLACK : WHITE));
                     break;
                 default:
-                    break;
+                    throw std::exception();
             }
             col++;
         }

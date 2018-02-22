@@ -69,7 +69,6 @@ char Pawn::getCLIToken() const {
 std::string Pawn::getUnicodeToken() {
     if (player != WHITE) {
         return "\u2659";
-    } else {
-        return "\u265F";
     }
+    return "\u265F";
 }

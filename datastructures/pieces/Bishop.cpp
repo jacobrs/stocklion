@@ -90,7 +90,6 @@ char Bishop::getCLIToken() const {
 std::string Bishop::getUnicodeToken() {
     if (player != WHITE) {
         return "\u2657";
-    } else {
-        return "\u265D";
     }
+    return "\u265D";
 }

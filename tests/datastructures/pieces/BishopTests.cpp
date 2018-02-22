@@ -4,8 +4,7 @@
 #include "datastructures/Board.h"
 #include "datastructures/pieces/Bishop.h"
 
-
-TEST(BishopTests, MiddleOpenBoardPossibleMoves){
+TEST(BishopTests, MiddleOpenBoardPossibleMoves) {
     auto board = new Board;
 
     board->wipeBoard();
@@ -36,7 +35,7 @@ TEST(BishopTests, MiddleOpenBoardPossibleMoves){
     delete bishop;
 }
 
-TEST(BishopTests, BlockedByEnemy){
+TEST(BishopTests, BlockedByEnemy) {
     auto board = new Board;
 
     board->wipeBoard();
@@ -45,6 +44,7 @@ TEST(BishopTests, BlockedByEnemy){
     board->placePiece({'B', 7}, new Pawn({'B', 7}, BLACK));
     board->placePiece({'F', 5}, new Pawn({'F', 5}, BLACK));
     board->placePiece({'G', 2}, new Pawn({'G', 2}, BLACK));
+    board->placePiece({'C', 2}, new Pawn({'C', 2}, BLACK));
 
     ASSERT_EQ(board->getPiece({'E', 4}), bishop);
 
@@ -56,10 +56,8 @@ TEST(BishopTests, BlockedByEnemy){
     positions.push_back({'G', 2});
     positions.push_back({'D', 3});
     positions.push_back({'C', 2});
-    positions.push_back({'B', 1});
     positions.push_back({'F', 5});
 
-    ASSERT_TRUE(board->getPiece({'E', 4}) == bishop);
     ASSERT_TRUE(VectorComparator::comparePositions(board->getPiece({'E', 4})->possibleMoves(*board), positions));
 
     delete board;
@@ -67,7 +65,7 @@ TEST(BishopTests, BlockedByEnemy){
 
 }
 
-TEST(BishopTests, BlockedByFriendly){
+TEST(BishopTests, BlockedByFriendly) {
     auto board = new Board;
 
     board->wipeBoard();
@@ -87,10 +85,19 @@ TEST(BishopTests, BlockedByFriendly){
     positions.push_back({'C', 2});
     positions.push_back({'B', 1});
 
-    ASSERT_TRUE(board->getPiece({'E', 4}) == bishop);
     ASSERT_TRUE(VectorComparator::comparePositions(board->getPiece({'E', 4})->possibleMoves(*board), positions));
 
     delete board;
     delete bishop;
+
+}
+
+TEST(BishopTests, UnicodeRepresentation) {
+
+    Bishop b = Bishop({'E', 4}, WHITE);
+    ASSERT_EQ(b.getUnicodeToken(), "\u265D");
+
+    b = Bishop({'E', 4}, BLACK);
+    ASSERT_EQ(b.getUnicodeToken(), "\u2657");
 
 }

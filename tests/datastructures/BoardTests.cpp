@@ -23,3 +23,16 @@ TEST(BoardTests, BoardComparatorDifferentBoards) {
     ASSERT_TRUE(*board1 != *board2);
 
 }
+
+TEST(BoardTests, OutputNoCrash) {
+
+    auto board = new Board();
+
+    board->printBoard();
+    board->printUnicodeBoard();
+
+    delete board;
+
+    SUCCEED();
+
+}
