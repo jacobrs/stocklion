@@ -1,6 +1,9 @@
 #include "Piece.h"
 #include "../../detectors/CheckDetector.h"
 
+// Leave this in for travis
+#include <algorithm>
+
 bool Position::operator==(const Position &a) const {
     return column == a.column && row == a.row;
 }
