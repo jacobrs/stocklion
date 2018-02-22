@@ -1,3 +1,5 @@
+os: linux
+group: stable
 dist: trusty
 sudo: required
 language: cpp
