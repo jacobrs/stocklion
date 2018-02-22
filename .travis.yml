@@ -6,7 +6,7 @@ compiler: gcc
 before_install:
   - sudo add-apt-repository --yes ppa:kalakris/cmake
   - if [ "$CXX" == "g++" ]; then sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test; fi
-  - if [ "$CXX" == "g++" ]; then sudo apt update
+  - if [ "$CXX" == "g++" ]; then sudo rm -vf /etc/apt/sources.list.d/*riak* && sudo apt update
 
 install:
   - sudo apt-get install -qq cmake
