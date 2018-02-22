@@ -42,3 +42,9 @@ add_executable(stocklion main.cpp datastructures/pieces/Piece.cpp datastructures
 add_executable(stocklion_tests tests/converters/PGNConverterTests.cpp datastructures/pieces/Piece.cpp datastructures/pieces/Piece.h datastructures/pieces/Pawn.cpp datastructures/pieces/Pawn.h datastructures/pieces/Knight.cpp datastructures/pieces/Knight.h datastructures/pieces/Rook.cpp datastructures/pieces/Rook.h datastructures/pieces/Bishop.cpp datastructures/pieces/Bishop.h datastructures/pieces/King.cpp datastructures/pieces/King.h datastructures/pieces/Queen.cpp datastructures/pieces/Queen.h datastructures/Board.cpp datastructures/Board.h converters/FENConverter.cpp converters/FENConverter.h converters/PGNConverter.h converters/PGNConverter.cpp util/UnicodeTable.h util/UnicodeTable.cpp detectors/CheckDetector.cpp detectors/CheckDetector.h tests/datastructures/pieces/BishopTests.cpp util/VectorComparator.cpp util/VectorComparator.h tests/datastructures/pieces/PieceTests.cpp tests/datastructures/BoardTests.cpp)
 target_link_libraries(stocklion_tests gtest gmock_main)
 add_test(NAME test_stocklion COMMAND stocklion_tests)
+
+set_target_properties(
+        PROPERTIES
+        COMPILE_FLAGS "-ftest-coverage -fprofile-arcs"
+        LINK_FLAGS    "-lgcov --coverage"
+)
