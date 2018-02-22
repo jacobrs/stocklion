@@ -1,6 +1,7 @@
 #ifndef STOCKLION_PIECE_H
 #define STOCKLION_PIECE_H
 
+#include <string>
 #include <vector>
 
 class Board;
