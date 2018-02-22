@@ -9,11 +9,11 @@ bool Position::operator!=(const Position &other) const {
     return !(*this == other);
 }
 
-bool Piece::operator==(const Piece &other) {
+bool Piece::operator==(const Piece &other) const {
     return other.player == player && other.currentPosition == currentPosition && other.getCLIToken() == getCLIToken();
 }
 
-bool Piece::operator!=(const Piece &other) {
+bool Piece::operator!=(const Piece &other) const {
     return !(*this == other);
 }
 

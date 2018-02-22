@@ -32,8 +32,8 @@ public:
     virtual char getCLIToken() const = 0;
     virtual char32_t getUnicodeToken() = 0;
     void move(Position position);
-    bool operator==(const Piece &other);
-    bool operator!=(const Piece &other);
+    bool operator==(const Piece &other) const;
+    bool operator!=(const Piece &other) const;
 };
 
 
