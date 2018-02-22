@@ -8,7 +8,7 @@ public:
     explicit King(const Position &initialPosition, const Color &initialPlayer);
     std::vector<Position> possibleDirectMoves(Board &board) override;
     char getCLIToken() const override;
-    char32_t getUnicodeToken() override;
+    std::string getUnicodeToken() override;
 };
 
 #endif

@@ -13,11 +13,11 @@ enum rowSection {
 
 class UnicodeTable {
 private:
-    static const std::map<std::string, char32_t> UNICODE_CHARS;
+    static const std::map<std::string, std::string> UNICODE_CHARS;
 public:
     static void printLine(rowSection , int);
     static void printChar(std::string);
-    static void printChar32(char32_t);
+    static void printChar32(std::string);
 };
 
 #endif

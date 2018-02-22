@@ -1,6 +1,7 @@
 #ifndef STOCKLION_PIECE_H
 #define STOCKLION_PIECE_H
 
+#include <string>
 #include <vector>
 
 class Board;
@@ -30,7 +31,7 @@ public:
     virtual std::vector<Position> possibleDirectMoves(Board& board) = 0;
     std::vector<Position> possibleMoves(Board& board);
     virtual char getCLIToken() const = 0;
-    virtual char32_t getUnicodeToken() = 0;
+    virtual std::string getUnicodeToken() = 0;
     void move(Position position);
     bool operator==(const Piece &other) const;
     bool operator!=(const Piece &other) const;
