@@ -10,7 +10,9 @@ std::vector<Position> King::possibleDirectMoves(Board &board) {
     possiblePosition.column--;
     // Handles left side moves
     if (possiblePosition.column >= 'A') {
-        moves.push_back(possiblePosition);
+        if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+            moves.push_back(possiblePosition);
+        }
 
         if (possiblePosition.row - 1 >= 1) {
             possiblePosition.row--;
@@ -32,7 +34,9 @@ std::vector<Position> King::possibleDirectMoves(Board &board) {
     possiblePosition.column++;
     // Handles right side moves
     if (possiblePosition.column <= 'H') {
-        moves.push_back(possiblePosition);
+        if(this->isEnemyOrEmpty(board.getPiece(possiblePosition))) {
+            moves.push_back(possiblePosition);
+        }
 
         if (possiblePosition.row - 1 >= 1) {
             possiblePosition.row--;
