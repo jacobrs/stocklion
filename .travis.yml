@@ -13,6 +13,7 @@ addons:
       - g++-6
       - mingw-w64
       - cmake
+      - lcov
 script:
   # Linking the new compiler versions
   - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
@@ -22,7 +23,15 @@ script:
   - export CXX=/usr/bin/g++-6
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
-  - mkdir build && cd build
-  - cmake ../
+  - cmake . -DCMAKE_BUILD_TYPE=Debug
   - make
   - ./stocklion_tests
+
+after_success:
+    # Creating report
+  - cd ${TRAVIS_BUILD_DIR}
+  - lcov --directory . --capture --output-file coverage.info # capture coverage info
+  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter out system
+  - lcov --list coverage.info #debug info
+  # Uploading report to CodeCov
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
