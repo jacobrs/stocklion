@@ -4,15 +4,12 @@ language: cpp
 compiler: gcc
 
 before_install:
-  - sudo add-apt-repository --yes ppa:kalakris/cmake
-  - if [ "$CXX" == "g++" ]; then sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test; fi
-  - if [ "$CXX" == "g++" ]; then sudo apt update; fi
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
 
 install:
-  - sudo apt-get install -qq cmake
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-6; fi
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-6" CC="gcc-6"; fi
-  - if [ "$CXX" = "g++" ]; then sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6; fi
+  - sudo apt-get install -qq g++-6
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
 
 before_script: cmake CMakeLists.txt
 
