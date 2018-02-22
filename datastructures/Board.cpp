@@ -56,10 +56,6 @@ bool Board::isMoveValid(Position &initPos, Position &destinationPosition, Color 
     return true;
 }
 
-std::vector<Position> Board::validMovesOfPiece(Position &piecePos) {
-    return board[piecePos.row][piecePos.column - 'A' + 1]->possibleMoves(*this);
-}
-
 void Board::initState() {
     for(int i = 0; i < 9; i++)
         for(int j = 0; j < 9; j++)
