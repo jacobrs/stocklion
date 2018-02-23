@@ -33,7 +33,6 @@ void PGNConverter::convert(std::string pgnString, Board *board) {
             playAlgebraicMove(BLACK, blackMove, board);
         }
 
-        board->printUnicodeBoard();
         regIterator++;
     }
 }
@@ -91,7 +90,7 @@ int PGNConverter::getAlgebraicMoveType(std::string algebraicString) {
         return RESULT_MOVE;
     }
 
-    std::regex pieceRegEx("^[NKRQB]([1-8]|[a-h])?x?[a-h][1-8][+#]?$");
+    std::regex pieceRegEx("^[NKRQB][a-h]?[1-8]?x?[a-h][1-8][+#]?$");
     std::smatch sm;
     std::regex_match(algebraicString, sm, pieceRegEx);
 
@@ -112,48 +111,52 @@ int PGNConverter::getAlgebraicMoveType(std::string algebraicString) {
 void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebraicMove, Board *board, Position &start, Position &end) {
     std::regex whiteSpace("\\s+");
     algebraicMove = std::regex_replace(algebraicMove, whiteSpace, "");
-    std::regex complexMove("^([NKBQR])?([a-h]|[1-8])?(x)?([a-h])([1-8])(=[NBQR])?[+#]?$");
+    std::regex complexMove("^([NKBQR])?([a-h])?([1-8])?(x)?([a-h])([1-8])(=[NBQR])?[+#]?$");
     std::smatch matches;
     std::regex_search(algebraicMove, matches, complexMove);
 
     // Get all the relevant tokens from the above regex
     char CLIToken = matches[1].str()[0];
-    char multiMoveInfo = (char)(toupper(matches[2].str()[0]));
-    bool isExecution = matches[3].str()[0] == 'x';
-    end.column = (char)(toupper(matches[4].str()[0]));
-    end.row = matches[5].str()[0] - '0';
+    char multiMoveFileInfo = (char)(toupper(matches[2].str()[0]));
+    char multiMoveRankInfo = (char)(matches[3].str()[0]);
+    bool isExecution = matches[4].str()[0] == 'x';
+    end.column = (char)(toupper(matches[5].str()[0]));
+    end.row = matches[6].str()[0] - '0';
 
     if (CLIToken == '\0') {
         // Pawn move
         CLIToken = 'P';
     }
 
-    if (multiMoveInfo != '\0') {
-        // Get the specific token in this column/row
-        if (multiMoveInfo >= 'A' && multiMoveInfo <= 'H') {
-            for (int i = 1; i < 9; i++) {
-                Position positionCandidate = {
-                        multiMoveInfo,
-                        i
-                };
-                Piece *pieceCandidate = board->getPiece(positionCandidate);
-                if (pieceCandidate != nullptr && pieceCandidate->player == currPlayer && pieceCandidate->getCLIToken() == CLIToken) {
-                    start = positionCandidate;
-                    return;
-                }
+    if (CLIToken != 'P' && multiMoveFileInfo != '\0' && multiMoveRankInfo != '\0') {
+        start = {
+            multiMoveFileInfo,
+            multiMoveRankInfo - '0'
+        };
+    } else if (CLIToken != 'P' && multiMoveFileInfo != '\0') {
+        for (int i = 1; i < 9; i++) {
+            Position positionCandidate = {
+                multiMoveFileInfo,
+                i
+            };
+            Piece *pieceCandidate = board->getPiece(positionCandidate);
+            if (pieceCandidate != nullptr && pieceCandidate->player == currPlayer &&
+                pieceCandidate->getCLIToken() == CLIToken) {
+                start = positionCandidate;
+                return;
             }
-        } else {
-            for (unsigned i = 0; i < 8; i++) {
-                int potentialRow = multiMoveInfo - '0';
-                Position positionCandidate = {
-                        (char)('a' + i),
-                        potentialRow
-                };
-                Piece *pieceCandidate = board->getPiece(positionCandidate);
-                if (pieceCandidate != nullptr && pieceCandidate->player == currPlayer && pieceCandidate->getCLIToken() == CLIToken) {
-                    start = positionCandidate;
-                    return;
-                }
+        }
+    } else if (CLIToken != 'P' && multiMoveRankInfo != '\0') {
+        for (unsigned i = 0; i < 8; i++) {
+            int potentialRow = multiMoveRankInfo - '0';
+            Position positionCandidate = {
+                    (char)('A' + i),
+                    potentialRow
+            };
+            Piece *pieceCandidate = board->getPiece(positionCandidate);
+            if (pieceCandidate != nullptr && pieceCandidate->player == currPlayer && pieceCandidate->getCLIToken() == CLIToken) {
+                start = positionCandidate;
+                return;
             }
         }
     } else {
@@ -169,14 +172,10 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
             }
 
             if (isExecution) {
-                if (end.column == 'H') {
-                    potentialCols.push_back('G');
-                } else if (end.column == 'A') {
-                    potentialCols.push_back('B');
-                } else {
-                    potentialCols.push_back((char) (end.column + 1));
-                    potentialCols.push_back((char) (end.column - 1));
+                if (multiMoveFileInfo == '\0') {
+                    throw std::invalid_argument("The pgn passed in is invalid.");
                 }
+                potentialCols.push_back(multiMoveFileInfo);
             } else {
                 potentialCols.push_back(end.column);
 
@@ -187,11 +186,11 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
                 }
             }
 
-            for (unsigned i = 0; i < potentialRows.size(); i++) {
-                for (unsigned j = 0; j < potentialCols.size(); j++) {
+            for (int &potentialRow : potentialRows) {
+                for (char &potentialCol : potentialCols) {
                     Position positionCandidate = {
-                            potentialCols[j],
-                            potentialRows[i]
+                            potentialCol,
+                            potentialRow
                     };
                     Piece *pieceCandidate = board->getPiece(positionCandidate);
                     if (pieceCandidate != nullptr && pieceCandidate->player == currPlayer && pieceCandidate->getCLIToken() == CLIToken) {
@@ -217,12 +216,13 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
                 case 'N':
                     potentialPiece = new Knight(end, currPlayer);
                     break;
+                default:
+                    throw std::invalid_argument("The pgn passed in is invalid.");
             }
 
             std::vector<Position> potentialStartingPositions = potentialPiece->possibleMoves(*emptyBoard);
 
-            for (unsigned i = 0; i < potentialStartingPositions.size(); i++) {
-                Position positionCandidate = potentialStartingPositions[i];
+            for (auto positionCandidate : potentialStartingPositions) {
                 Piece *pieceCandidate = board->getPiece(positionCandidate);
 
                 if (pieceCandidate != nullptr && pieceCandidate->player == currPlayer && pieceCandidate->getCLIToken() == CLIToken) {
