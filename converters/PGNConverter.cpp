@@ -172,6 +172,9 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
             }
 
             if (isExecution) {
+                if (multiMoveFileInfo == '\0') {
+                    throw std::invalid_argument("The pgn passed in is invalid.");
+                }
                 potentialCols.push_back(multiMoveFileInfo);
             } else {
                 potentialCols.push_back(end.column);
