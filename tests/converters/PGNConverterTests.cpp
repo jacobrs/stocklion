@@ -51,6 +51,16 @@ TEST(PGNConverterTest, HandlesAmbiguousRankExecution) {
     ASSERT_TRUE(*testBoard == *testAgainstBoard);
 }
 
+TEST(PGNConverterTest, PawnKilling) {
+    Board *testBoard = new Board(WHITE);
+    Board *testAgainstBoard = new Board(WHITE);
+    FENConverter::convert("8/8/8/q2q3q/1P2P1P1/8/8/8 w -", testBoard);
+    PGNConverter::convert("1. bxa5 Qhf5 2. gxf5 Qxf5 3. exf5", testBoard);
+    FENConverter::convert("8/8/8/P4P2/8/8/8/8 b -", testAgainstBoard);
+
+    ASSERT_TRUE(*testBoard == *testAgainstBoard);
+}
+
 /*TEST(PGNConverterTest, HandlesCastleKingSide) {
     Board *testBoard = new Board(WHITE);
     Board *testAgainstBoard = new Board(WHITE);
