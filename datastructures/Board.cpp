@@ -6,6 +6,7 @@
 #include "pieces/Pawn.h"
 #include "pieces/Queen.h"
 #include "pieces/Rook.h"
+#include "../detectors/CheckDetector.h"
 #include "../util/UnicodeTable.h"
 
 Board::Board() {
@@ -49,13 +50,7 @@ bool Board::isMoveValid(Position &initPos, Position &destinationPosition, Color 
         }
     }
 
-    if(!canBeDone){
-        return false;
-    }
-
-    //TODO check to see if the king is in check
-
-    return true;
+    return canBeDone && !CheckDetector::moveMakesPlayerChecked(initPos, destinationPosition, *this, *piece);
 }
 
 void Board::initState() {
