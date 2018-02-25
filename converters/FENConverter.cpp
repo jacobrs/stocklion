@@ -11,11 +11,10 @@ void FENConverter::convert(std::string fen, Board *board) {
 
     board->wipeBoard();
 
-    int row = 8;
-    char col = 'A';
-
     try {
 
+        int row = 8;
+        char col = 'A';
         for (int i = 0; i < fen.length(); i++) {
             if (col > 'H') {
                 col = 'A';

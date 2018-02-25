@@ -60,6 +60,6 @@ void UnicodeTable::printChar(std::string charName) {
     std::cout << UNICODE_CHARS.at(charName);
 }
 
-void UnicodeTable::printChar32(std::string charUnicode) {
+void UnicodeTable::printChar32(std::string &charUnicode) {
     std::cout << charUnicode;
 }

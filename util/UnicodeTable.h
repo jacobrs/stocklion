@@ -17,7 +17,7 @@ private:
 public:
     static void printLine(rowSection , int);
     static void printChar(std::string);
-    static void printChar32(std::string);
+    static void printChar32(std::string&);
 };
 
 #endif

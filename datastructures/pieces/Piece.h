@@ -26,7 +26,8 @@ public:
     Color player;
 
     bool isEnemyOrEmpty(Piece *p);
-    explicit Piece(Position initialPosition, Color player);
+
+    explicit Piece(Position initPos, Color initPlayer):currentPosition(initPos), player(initPlayer) {};
     virtual ~Piece();
     virtual std::vector<Position> possibleDirectMoves(Board& board) = 0;
     std::vector<Position> possibleMoves(Board& board);
