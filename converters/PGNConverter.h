@@ -7,6 +7,7 @@
 enum MoveType {
     PIECE_MOVE,
     PAWN_MOVE,
+    PAWN_PROMOTION,
     CASTLE_MOVE_KING,
     CASTLE_MOVE_QUEEN,
     RESULT_MOVE,
@@ -16,6 +17,7 @@ enum MoveType {
 class PGNConverter {
 private:
     static void getPieceOrPawnPosition(Color, std::string, Board*, Position&, Position&);
+    static void pawnPromotionMove(Position, Position, std::string, Board *);
     static Board *emptyBoard;
 public:
     static void convert(std::string, Board*);

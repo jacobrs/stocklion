@@ -64,12 +64,20 @@ void PGNConverter::playAlgebraicMove(Color currPlayer, std::string algebraicStri
         case PAWN_MOVE:
             getPieceOrPawnPosition(currPlayer, algebraicString, board, startingPosition, endingPosition);
             break;
+        case PAWN_PROMOTION: {
+            getPieceOrPawnPosition(currPlayer, algebraicString, board, startingPosition, endingPosition);
+            std::regex pawnPromotionRegEx("=[NBQR]");
+            std::smatch sm;
+            std::regex_search(algebraicString, sm, pawnPromotionRegEx);
+            pawnPromotionMove(startingPosition, endingPosition, sm.str(0), board);
+            break;
+        }
         default:
             // Throw an exception since the pgn format is invalid
             throw std::invalid_argument("The pgn passed in is invalid.");
     }
 
-    if (!board->movePiece(startingPosition, endingPosition, currPlayer)) {
+    if (moveType != PAWN_PROMOTION && !board->movePiece(startingPosition, endingPosition, currPlayer)) {
         throw std::invalid_argument("The pgn passed in is invalid.");
     }
 }
@@ -105,7 +113,39 @@ int PGNConverter::getAlgebraicMoveType(std::string algebraicString) {
         return PAWN_MOVE;
     }
 
+    std::regex pawnPromotionRegEx("=[NBQR]");
+    if (std::regex_search(algebraicString, sm, pawnPromotionRegEx))
+        return PAWN_PROMOTION;
+
     return INVALID_MOVE;
+}
+
+void PGNConverter::pawnPromotionMove(Position startingPosition, Position endingPosition, std::string matchedString, Board *board) {
+    Piece *currentPiece = board->getPiece(startingPosition);
+    Position *newPosition = new Position({endingPosition.column, endingPosition.row});
+    Piece *newPiece = nullptr;
+
+    switch (matchedString[1]) {
+        case 'N':
+            newPiece = new Knight(*newPosition, currentPiece->player);
+            break;
+        case 'B':
+            newPiece = new Bishop(*newPosition, currentPiece->player);
+            break;
+        case 'Q':
+            newPiece = new Queen(*newPosition, currentPiece->player);
+            break;
+        case 'R':
+            newPiece = new Rook(*newPosition, currentPiece->player);
+            break;
+        default:
+            // Throw an exception since the pgn format is invalid
+            throw std::invalid_argument("The pgn passed in is invalid.");
+    }
+
+    board->placePiece(endingPosition, newPiece);
+    board->placePiece(startingPosition, nullptr);
+    delete currentPiece;
 }
 
 void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebraicMove, Board *board, Position &start, Position &end) {
@@ -130,14 +170,14 @@ void PGNConverter::getPieceOrPawnPosition(Color currPlayer, std::string algebrai
 
     if (CLIToken != 'P' && multiMoveFileInfo != '\0' && multiMoveRankInfo != '\0') {
         start = {
-            multiMoveFileInfo,
-            multiMoveRankInfo - '0'
+                multiMoveFileInfo,
+                multiMoveRankInfo - '0'
         };
     } else if (CLIToken != 'P' && multiMoveFileInfo != '\0') {
         for (int i = 1; i < 9; i++) {
             Position positionCandidate = {
-                multiMoveFileInfo,
-                i
+                    multiMoveFileInfo,
+                    i
             };
             Piece *pieceCandidate = board->getPiece(positionCandidate);
             if (pieceCandidate != nullptr && pieceCandidate->player == currPlayer &&

@@ -53,6 +53,8 @@ bool Board::isMoveValid(Position &initPos, Position &destinationPosition, Color 
         return false;
     }
 
+    //TODO check to see if the king is in check
+
     return true;
 }
 
