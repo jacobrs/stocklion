@@ -106,16 +106,16 @@ int PGNConverter::getAlgebraicMoveType(std::string algebraicString) {
         return PIECE_MOVE;
     }
 
+    std::regex pawnPromotionRegEx("=[NBQR]");
+    if (std::regex_search(algebraicString, sm, pawnPromotionRegEx))
+        return PAWN_PROMOTION;
+
     std::regex pawnRegEx("^[a-h]?x?[a-h][1-8](=[NBQR])?[+#]?$");
     std::regex_match(algebraicString, sm, pawnRegEx);
 
     if (sm.length()) {
         return PAWN_MOVE;
     }
-
-    std::regex pawnPromotionRegEx("=[NBQR]");
-    if (std::regex_search(algebraicString, sm, pawnPromotionRegEx))
-        return PAWN_PROMOTION;
 
     return INVALID_MOVE;
 }
